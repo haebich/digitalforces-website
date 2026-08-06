@@ -14,7 +14,8 @@ const services = [
     <main>
       <section class="hero">
         <div class="hero-kicker"><span></span> Commerce Engineering · Germany</div>
-        <h1>Wir machen<br /><em>E-Commerce</em><br />belastbar.</h1>
+        <div class="hero-variants" aria-label="Textvariante für Review"><button data-hero="problem" aria-pressed="true">Problemorientiert</button><button data-hero="result" aria-pressed="false">Ergebnisorientiert</button></div>
+        <h1 data-hero-copy data-problem="Komplexe Shops.<br><em>Klare Systeme.</em>" data-result="E-Commerce,<br><em>der belastbar</em><br>funktioniert.">Komplexe Shops.<br /><em>Klare Systeme.</em></h1>
         <div class="hero-bottom">
           <p>Strategie, Shopware-Entwicklung und Infrastruktur aus einer Hand. Für Systeme, die nicht nur heute funktionieren.</p>
           <a class="circle-link" href="#expertise" aria-label="Expertise entdecken">↓</a>
@@ -25,6 +26,7 @@ const services = [
       <section class="signal" aria-label="Leistungsversprechen">
         <span>BUILD</span><i>✦</i><span>OPERATE</span><i>✦</i><span>IMPROVE</span><i>✦</i>
       </section>
+      <section class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><div class="flow"><span>Langsame Releases</span><b>→</b><span>Unklare Ursachen</span><b>→</b><span>Teure Risiken</span><strong>Analyse → Architektur → Betrieb</strong></div></div></section>
 
       <section id="expertise" class="section expertise" data-reveal>
         <div class="section-label">01 / Expertise</div>
@@ -55,6 +57,9 @@ const services = [
           </div>
         </div>
       </section>
+      <section class="section proof" data-reveal><div class="section-label">03 / Nachweis</div><div><p class="eyebrow">Proof – Review-Platzhalter</p><h2>Ergebnisse brauchen<br /><em>Belege.</em></h2><div class="proof-grid"><article><strong>—</strong><p>Messbarer Performance-Effekt nach Freigabe</p></article><article><strong>—</strong><p>Freigegebene Projektreferenz</p></article><article><strong>—</strong><p>Verifizierte Betriebskennzahl</p></article></div></div></section>
+      <section class="section responsibility" data-reveal><div class="section-label">04 / Verantwortung</div><div><p class="eyebrow">Direkte Zusammenarbeit</p><h2>Die Menschen am Tisch<br />lösen das <em>Problem.</em></h2><p class="lead">Strategie, Entwicklung und Betrieb arbeiten als ein System. Zuständigkeiten sind sichtbar, Entscheidungen dokumentiert und Übergaben kein Ratespiel.</p></div></section>
+      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser Schwerpunkt. Infrastruktur, Integrationen und technische Strategie betrachten wir systemübergreifend.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt ein Projekt?</summary><p>Mit einem fokussierten technischen Gespräch und einem klar abgegrenzten ersten Prüfschritt.</p></details></div></section>
 
       <section class="statement" data-reveal><p>Komplexität verschwindet nicht.</p><h2>Aber sie lässt sich<br /><em>beherrschen.</em></h2></section>
 

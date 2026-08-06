@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/briefing.css';
 const { title, description } = Astro.props;
 ---
 <!doctype html>
@@ -27,6 +28,12 @@ const { title, description } = Astro.props;
           if (target) target.textContent = button.getAttribute('data-copy') || '';
         });
       });
+      document.querySelectorAll('[data-hero]').forEach((button) => button.addEventListener('click', () => {
+        document.querySelectorAll('[data-hero]').forEach((item) => item.setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+        const copy = document.querySelector('[data-hero-copy]');
+        if (copy) copy.innerHTML = copy.getAttribute(button.getAttribute('data-hero') === 'result' ? 'data-result' : 'data-problem') || '';
+      }));
     </script>
   </body>
 </html>
