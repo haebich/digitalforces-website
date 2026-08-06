@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+const services = [
+  ['Shopware Engineering', 'Wir entwickeln belastbare Shopware-Lösungen nah am Standard – von individuellen Plugins bis zu komplexen Integrationen.'],
+  ['Performance & Betrieb', 'Wir verbinden Code, Infrastruktur und Observability zu einem System, das auch unter Last ruhig bleibt.'],
+  ['Technische Strategie', 'Wir übersetzen Geschäftsziele in klare Architekturentscheidungen, Roadmaps und überprüfbare Schritte.'],
+  ['Recovery & Stabilität', 'Wir finden Ursachen, sichern den Betrieb und bauen Wiederholungsfehler systematisch aus dem Weg.'],
+];
+---
+<Base title="DigitalForces — Commerce Engineering" description="Technische Exzellenz für ambitionierte E-Commerce-Systeme.">
+  <div id="top" class="page-shell">
+    <Header />
+    <main>
+      <section class="hero">
+        <div class="hero-kicker"><span></span> Commerce Engineering · Germany</div>
+        <h1>Wir machen<br /><em>E-Commerce</em><br />belastbar.</h1>
+        <div class="hero-bottom">
+          <p>Strategie, Shopware-Entwicklung und Infrastruktur aus einer Hand. Für Systeme, die nicht nur heute funktionieren.</p>
+          <a class="circle-link" href="#expertise" aria-label="Expertise entdecken">↓</a>
+        </div>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      </section>
+
+      <section class="signal" aria-label="Leistungsversprechen">
+        <span>BUILD</span><i>✦</i><span>OPERATE</span><i>✦</i><span>IMPROVE</span><i>✦</i>
+      </section>
+
+      <section id="expertise" class="section expertise" data-reveal>
+        <div class="section-label">01 / Expertise</div>
+        <div>
+          <p class="eyebrow">Was wir lösen</p>
+          <h2>Technik, die dem<br />Geschäft <em>dient.</em></h2>
+          <div class="service-grid">
+            <div class="service-list" role="tablist" aria-label="Leistungen">
+              {services.map(([name, copy], index) => (
+                <button data-service data-copy={copy} aria-selected={index === 0 ? 'true' : 'false'}>
+                  <span>0{index + 1}</span>{name}<b>↗</b>
+                </button>
+              ))}
+            </div>
+            <aside><p data-service-copy>{services[0][1]}</p><div class="code-card"><small>SYSTEM STATUS</small><strong>99.99%</strong><span>stable by design</span></div></aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="approach" class="section approach" data-reveal>
+        <div class="section-label">02 / Arbeitsweise</div>
+        <div>
+          <p class="eyebrow">Klarer Prozess</p><h2>Kein Theater.<br /><em>Saubere Arbeit.</em></h2>
+          <div class="steps">
+            <article><span>01</span><h3>Verstehen</h3><p>Wir lesen System, Daten und Ziele, bevor wir Lösungen versprechen.</p></article>
+            <article><span>02</span><h3>Entscheiden</h3><p>Wir machen Optionen, Risiken und Konsequenzen transparent.</p></article>
+            <article><span>03</span><h3>Liefern</h3><p>Kleine, prüfbare Schritte. Dokumentiert, messbar und übergabefähig.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement" data-reveal><p>Komplexität verschwindet nicht.</p><h2>Aber sie lässt sich<br /><em>beherrschen.</em></h2></section>
+
+      <section id="contact" class="contact" data-reveal>
+        <p class="eyebrow">Bereit für den nächsten Schritt?</p><h2>Lasst uns Klarheit<br />ins System bringen.</h2>
+        <a href="mailto:info@digital-forces.de">Projekt anfragen <span>↗</span></a>
+        <footer><span>DigitalForces © 2026</span><span>Impressum · Datenschutz</span><span>Built for resilience.</span></footer>
+      </section>
+    </main>
+  </div>
+</Base>
