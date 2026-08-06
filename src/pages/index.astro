@@ -2,22 +2,22 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 const services = [
-  ['Commerce-Entwicklung', 'Wir entwickeln belastbare Commerce-Lösungen nah am Standard – von individuellen Erweiterungen bis zu komplexen Integrationen.'],
-  ['Performance & Betrieb', 'Wir verbinden Code, Infrastruktur und Observability zu einem System, das auch unter Last ruhig bleibt.'],
-  ['Technische Strategie', 'Wir übersetzen Geschäftsziele in klare Architekturentscheidungen, Roadmaps und überprüfbare Schritte.'],
-  ['Wiederherstellung & Stabilität', 'Wir finden Ursachen, sichern den Betrieb und bauen Wiederholungsfehler systematisch aus dem Weg.'],
+  ['Shopware Engineering', 'Integrationen, Erweiterungen, Performance, Betrieb und Weiterentwicklung für anspruchsvolle Shopware-Systeme.'],
+  ['E-Commerce Business Consulting', 'Ziele, Prozesse und Prioritäten in eine belastbare Roadmap für dein E-Commerce-System übersetzen.'],
+  ['KI-Consulting', 'Konkrete Anwendungsfälle prüfen, Nutzen und Risiken bewerten und sinnvolle Umsetzungsschritte definieren.'],
+  ['Individuelle Entwicklung', 'Systeme und Erweiterungen jenseits des Standards entwickeln, wenn dein Geschäftsprozess es erfordert.'],
 ];
 ---
-<Base title="DigitalForces — Commerce Engineering" description="Technische Exzellenz für anspruchsvolle E-Commerce-Systeme.">
+<Base title="DigitalForces – Shopware, Beratung und individuelle Entwicklung" description="DigitalForces entwickelt und verbessert anspruchsvolle Shopware-Systeme – mit technischer Strategie, E-Commerce-Beratung, KI-Consulting und individueller Entwicklung.">
   <div id="top" class="page-shell">
     <Header />
     <main>
       <section class="hero">
-        <div class="hero-kicker"><span></span> Commerce Engineering · Deutschland</div>
+        <div class="hero-kicker"><span></span> Shopware Engineering · E-Commerce Consulting</div>
         <div class="hero-variants" aria-label="Textvariante für Review"><button data-hero="problem" aria-pressed="true">Problemorientiert</button><button data-hero="result" aria-pressed="false">Ergebnisorientiert</button></div>
-        <h1 data-hero-copy data-problem="Komplexe Shops.<br><em>Klare Systeme.</em>" data-result="E-Commerce,<br><em>der belastbar</em><br>funktioniert.">Komplexe Shops.<br /><em>Klare Systeme.</em></h1>
+        <h1 data-hero-copy data-problem="Komplexe Shopware-Systeme.<br><em>Klare Lösungen.</em>" data-result="Shopware,<br><em>das belastbar</em><br>funktioniert.">Komplexe Shopware-Systeme.<br /><em>Klare Lösungen.</em></h1>
         <div class="hero-bottom">
-          <p>Strategie, Commerce-Entwicklung und Infrastruktur aus einer Hand. Für Systeme, die nicht nur heute funktionieren.</p>
+          <div><p>Wir verbinden Shopware-Entwicklung, technische Strategie und E-Commerce-Beratung – und ergänzen individuelle Software oder KI dort, wo sie einen konkreten Nutzen schaffen.</p><a class="text-link" href="#contact">Projekt besprechen ↗</a></div>
           <a class="circle-link" href="#expertise" aria-label="Expertise entdecken">↓</a>
         </div>
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
@@ -26,7 +26,7 @@ const services = [
       <section class="signal" aria-label="Leistungsversprechen">
         <span>BAUEN</span><i>✦</i><span>BETREIBEN</span><i>✦</i><span>VERBESSERN</span><i>✦</i>
       </section>
-      <section class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><div class="flow"><span>Langsame Releases</span><b>→</b><span>Unklare Ursachen</span><b>→</b><span>Teure Risiken</span><strong>Analyse → Architektur → Betrieb</strong></div></div></section>
+      <section class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><div class="flow"><span>Medienbrüche</span><b>→</b><span>Manuelle Arbeit</span><b>→</b><span>Nicht integrierte Systeme</span><strong>Analyse → Lösungsschnitt → Umsetzung → Weiterentwicklung</strong></div></div></section>
 
       <section id="expertise" class="section expertise" data-reveal>
         <div class="section-label">01 / Expertise</div>
@@ -34,18 +34,19 @@ const services = [
           <p class="eyebrow">Was wir lösen</p>
           <h2>Technik, die dem<br />Geschäft <em>dient.</em></h2>
           <div class="service-grid">
-            <div class="service-list" role="tablist" aria-label="Leistungen">
-              {services.map(([name, copy], index) => (
-                <button data-service data-copy={copy} aria-selected={index === 0 ? 'true' : 'false'}>
+            <div class="service-list" role="tablist" aria-label="Leistungswege">
+              {services.map(([name], index) => (
+                <button id={`service-tab-${index}`} role="tab" data-service aria-controls={`service-panel-${index}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? '0' : '-1'}>
                   <span>0{index + 1}</span>{name}<b>↗</b>
                 </button>
               ))}
             </div>
-            <aside><p data-service-copy>{services[0][1]}</p><div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
+            <aside>{services.map(([name, copy], index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{name}</h3><p>{copy}</p></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
           </div>
         </div>
       </section>
 
+      <section id="shopware" class="statement" data-reveal><p>Shopware ist unser technischer Fokus.</p><h2>Dein Geschäftsziel<br />bleibt der <em>Maßstab.</em></h2></section>
       <section id="approach" class="section approach" data-reveal>
         <div class="section-label">02 / Arbeitsweise</div>
         <div>
@@ -59,15 +60,15 @@ const services = [
         </div>
       </section>
       <section class="section proof" data-reveal><div class="section-label">03 / Nachweis</div><div><p class="eyebrow">Nachweise – Platzhalter für die Abstimmung</p><h2>Ergebnisse brauchen<br /><em>Belege.</em></h2><div class="proof-grid"><article><strong>—</strong><p>Messbarer Leistungsgewinn nach Freigabe</p></article><article><strong>—</strong><p>Freigegebene Projektreferenz</p></article><article><strong>—</strong><p>Verifizierte Betriebskennzahl</p></article></div></div></section>
-      <section class="section responsibility" data-reveal><div class="section-label">04 / Verantwortung</div><div><p class="eyebrow">Direkte Zusammenarbeit</p><h2>Die Menschen am Tisch<br />lösen das <em>Problem.</em></h2><p class="lead">Strategie, Entwicklung und Betrieb arbeiten als ein System. Zuständigkeiten sind sichtbar, Entscheidungen dokumentiert und Übergaben kein Ratespiel.</p></div></section>
-      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser Schwerpunkt. Infrastruktur, Integrationen und technische Strategie betrachten wir systemübergreifend.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt ein Projekt?</summary><p>Mit einem fokussierten technischen Gespräch und einem klar abgegrenzten ersten Prüfschritt.</p></details></div></section>
+      <section class="section responsibility" data-reveal><div class="section-label">04 / Verantwortung</div><div><p class="eyebrow">Team – Platzhalter für die Abstimmung</p><h2>Direkte Zusammenarbeit.<br />Klare <em>Zuständigkeiten.</em></h2><p class="lead">Die Teamstruktur wird ergänzt, sobald Rollen, Profile und Bildmaterial freigegeben sind.</p></div></section>
+      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser technischer Fokus. Beratung, Integrationen, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsziel es erfordert.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt dein Projekt?</summary><p>Mit einem fokussierten technischen Gespräch und einem klar abgegrenzten ersten Prüfschritt.</p></details><details><summary>Wie funktionieren Übergabe und Betrieb?</summary><p>Entscheidungen und Änderungen werden nachvollziehbar dokumentiert. Das konkrete Betriebsmodell klären wir passend zu deinem System.</p></details></div></section>
 
       <section class="statement" data-reveal><p>Komplexität verschwindet nicht.</p><h2>Aber sie lässt sich<br /><em>beherrschen.</em></h2></section>
 
       <section id="contact" class="contact" data-reveal>
-        <p class="eyebrow">Bereit für den nächsten Schritt?</p><h2>Lasst uns Klarheit<br />ins System bringen.</h2>
-        <span class="contact-placeholder">Kontaktweg wird nach Freigabe ergänzt <span>↗</span></span>
-        <footer><span>DigitalForces · Entwurf 2026</span><span>Rechtliche Inhalte werden geprüft</span><span>Für belastbare Systeme.</span></footer>
+        <p class="eyebrow">Bereit für den nächsten Schritt?</p><h2>Lass uns dein Vorhaben<br />zuerst sauber <em>einordnen.</em></h2>
+        <a href="mailto:info@digital-forces.de">Projekt besprechen <span>↗</span></a>
+        <footer><span>DigitalForces · digital-forces.de</span><span>Impressum / Datenschutz · Review-Status</span><a href="mailto:info@digital-forces.de">info@digital-forces.de</a></footer>
       </section>
     </main>
   </div>
