@@ -2,10 +2,10 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 const services = [
-  ['Shopware Engineering', 'Integrationen, Erweiterungen, Performance, Betrieb und Weiterentwicklung für anspruchsvolle Shopware-Systeme.'],
-  ['E-Commerce Business Consulting', 'Ziele, Prozesse und Prioritäten in eine belastbare Roadmap für dein E-Commerce-System übersetzen.'],
-  ['KI-Consulting', 'Konkrete Anwendungsfälle prüfen, Nutzen und Risiken bewerten und sinnvolle Umsetzungsschritte definieren.'],
-  ['Individuelle Entwicklung', 'Systeme und Erweiterungen jenseits des Standards entwickeln, wenn dein Geschäftsprozess es erfordert.'],
+  { name: 'Shopware Engineering', problem: 'Dein Shopware-System ist geschäftskritisch, aber Änderungen, Integrationen oder Betrieb erzeugen unnötige Risiken.', result: 'Eine belastbare technische Grundlage, die sich nachvollziehbar betreiben und weiterentwickeln lässt.', scope: 'Integrationen, Erweiterungen, Performance, Stabilisierung, Betrieb und Weiterentwicklung.', entry: 'Technische Bestandsaufnahme mit priorisierten Handlungsfeldern.' },
+  { name: 'E-Commerce Business Consulting', problem: 'Viele Anforderungen konkurrieren miteinander; technische und geschäftliche Prioritäten sind nicht sauber verbunden.', result: 'Ein klares Zielbild und eine belastbare Roadmap für die nächsten Entscheidungen.', scope: 'Ziele, Prozesse, Priorisierung, Lösungsschnitt und Entscheidungsgrundlagen.', entry: 'Fokussierter Workshop zu Ausgangslage, Zielen und Abhängigkeiten.' },
+  { name: 'KI-Consulting', problem: 'Es gibt Ideen für KI, aber noch keinen belastbaren Anwendungsfall oder Nachweis, dass Aufwand, Datenlage und Nutzen zusammenpassen.', result: 'Eine fundierte Entscheidung: umsetzen, anders lösen oder bewusst verwerfen.', scope: 'Use-Case-Prüfung, Daten- und Risikobewertung, Prototyping und Umsetzungsplanung.', entry: 'Chancencheck für einen konkreten Prozess oder Anwendungsfall.' },
+  { name: 'Individuelle Entwicklung', problem: 'Standardfunktionen und vorhandene Systeme bilden einen wichtigen Geschäftsprozess nicht ausreichend ab.', result: 'Eine passende Erweiterung oder Anwendung mit klaren Schnittstellen und wartbarer Architektur.', scope: 'Individuelle Erweiterungen, Integrationen, interne Werkzeuge und eigenständige Anwendungen.', entry: 'Problem- und Lösungsschnitt vor der ersten Implementierung.' },
 ];
 ---
 <Base title="DigitalForces – Shopware, Beratung und individuelle Entwicklung" description="DigitalForces entwickelt und verbessert anspruchsvolle Shopware-Systeme – mit technischer Strategie, E-Commerce-Beratung, KI-Consulting und individueller Entwicklung.">
@@ -14,11 +14,9 @@ const services = [
     <main>
       <section class="hero">
         <div class="hero-kicker"><span></span> Shopware Engineering · E-Commerce Consulting</div>
-        <div class="hero-variants" role="group" aria-label="Textvariante für Review"><button data-hero="problem" aria-pressed="true">Problemorientiert</button><button data-hero="result" aria-pressed="false">Ergebnisorientiert</button></div>
-        <h1 data-hero-copy data-problem="Komplexe Shopware-Systeme.<br><em>Klare Lösungen.</em>" data-result="Shopware,<br><em>das belastbar</em><br>funktioniert.">Komplexe Shopware-Systeme.<br /><em>Klare Lösungen.</em></h1>
+        <h1>Shopware,<br /><em>das belastbar</em><br />funktioniert.</h1>
         <div class="hero-bottom">
-          <div><p>Wir verbinden Shopware-Entwicklung, technische Strategie und E-Commerce-Beratung – und ergänzen individuelle Software oder KI dort, wo sie einen konkreten Nutzen schaffen.</p><a class="text-link" href="#contact">Projekt besprechen ↗</a></div>
-          <a class="circle-link" href="#expertise" aria-label="Expertise entdecken">↓</a>
+          <div><p>Wir entwickeln, stabilisieren und verbessern anspruchsvolle Shopware-Systeme – technisch fundiert und mit Blick auf dein Geschäft.</p><div class="hero-actions"><a class="text-link" href="#contact">Projekt besprechen ↗</a><a class="secondary-link" href="#expertise">Leistungen ansehen ↓</a></div></div>
         </div>
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
       </section>
@@ -26,7 +24,7 @@ const services = [
       <section class="signal" aria-label="Leistungsversprechen">
         <span>BAUEN</span><i>✦</i><span>BETREIBEN</span><i>✦</i><span>VERBESSERN</span><i>✦</i>
       </section>
-      <section class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><div class="flow"><span>Medienbrüche</span><b>→</b><span>Manuelle Arbeit</span><b>→</b><span>Nicht integrierte Systeme</span><strong>Analyse → Lösungsschnitt → Umsetzung → Weiterentwicklung</strong></div></div></section>
+      <section class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><p class="lead compact">Langsame Releases, manuelle Umwege und instabile Integrationen sind selten Einzelprobleme. Wir betrachten Shop, Prozesse, Daten und Betrieb gemeinsam – damit nicht nur das nächste Ticket verschwindet, sondern die Ursache klar wird.</p><div class="flow"><span>Änderungen werden riskant</span><b>→</b><span>Systeme greifen nicht ineinander</span><b>→</b><span>Kontext bleibt unklar</span><strong>Analyse → Lösungsschnitt → Umsetzung → Weiterentwicklung</strong></div></div></section>
 
       <section id="expertise" class="section expertise" data-reveal>
         <div class="section-label">01 / Expertise</div>
@@ -35,14 +33,15 @@ const services = [
           <h2>Technik, die dem<br />Geschäft <em>dient.</em></h2>
           <div class="service-grid">
             <div class="service-list" role="tablist" aria-label="Leistungswege">
-              {services.map(([name], index) => (
+              {services.map(({ name }, index) => (
                 <button id={`service-tab-${index}`} role="tab" data-service aria-controls={`service-panel-${index}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? '0' : '-1'}>
                   <span>0{index + 1}</span>{name}<b>↗</b>
                 </button>
               ))}
             </div>
-            <aside>{services.map(([name, copy], index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{name}</h3><p>{copy}</p></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
+            <aside>{services.map(({ name, problem, result, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{name}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{problem}</dd></div><div><dt>Ergebnis</dt><dd>{result}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
           </div>
+          <a class="section-cta" href="#contact">Passenden Einstieg klären ↗</a>
         </div>
       </section>
 
@@ -50,7 +49,7 @@ const services = [
       <section id="approach" class="section approach" data-reveal>
         <div class="section-label">02 / Arbeitsweise</div>
         <div>
-          <p class="eyebrow">Klarer Prozess</p><h2>Kein Theater.<br /><em>Saubere Arbeit.</em></h2>
+          <p class="eyebrow">Klarer Prozess</p><h2>Klare Entscheidungen.<br /><em>Saubere Umsetzung.</em></h2>
           <div class="steps">
             <article><span>01</span><h3>Verstehen</h3><p>Wir lesen System, Daten und Ziele, bevor wir Lösungen versprechen.</p></article>
             <article><span>02</span><h3>Entscheiden</h3><p>Wir machen Optionen, Risiken und Konsequenzen transparent.</p></article>
@@ -59,15 +58,15 @@ const services = [
           </div>
         </div>
       </section>
-      <section class="section proof" data-reveal><div class="section-label">03 / Nachweis</div><div><p class="eyebrow">Nachweise – Platzhalter für die Abstimmung</p><h2>Ergebnisse brauchen<br /><em>Belege.</em></h2><div class="proof-grid"><article><strong>—</strong><p>Messbarer Leistungsgewinn nach Freigabe</p></article><article><strong>—</strong><p>Freigegebene Projektreferenz</p></article><article><strong>—</strong><p>Verifizierte Betriebskennzahl</p></article></div></div></section>
-      <section class="section responsibility" data-reveal><div class="section-label">04 / Verantwortung</div><div><p class="eyebrow">Team – Platzhalter für die Abstimmung</p><h2>Direkte Zusammenarbeit.<br />Klare <em>Zuständigkeiten.</em></h2><p class="lead">Die Teamstruktur wird ergänzt, sobald Rollen, Profile und Bildmaterial freigegeben sind.</p></div></section>
-      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser technischer Fokus. Beratung, Integrationen, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsziel es erfordert.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt dein Projekt?</summary><p>Mit einem fokussierten technischen Gespräch und einem klar abgegrenzten ersten Prüfschritt.</p></details><details><summary>Wie funktionieren Übergabe und Betrieb?</summary><p>Entscheidungen und Änderungen werden nachvollziehbar dokumentiert. Das konkrete Betriebsmodell klären wir passend zu deinem System.</p></details></div></section>
+      <section class="section proof" data-reveal><div class="section-label">03 / Nachweis</div><div><p class="eyebrow">Was unsere Arbeit belastbar macht</p><h2>Ergebnisse brauchen<br /><em>Belege.</em></h2><div class="proof-grid"><article><span class="slot-status">Inhalt in Freigabe</span><h3>Shopware-Case</h3><p>Strukturierter Platz für Ausgangslage, Entscheidung, Umsetzung und freigegebenes Ergebnis.</p></article><article><span class="slot-status">Inhalt in Freigabe</span><h3>Arbeitsartefakt</h3><p>Platz für ein echtes, bereinigtes Architektur-, Analyse- oder Entscheidungsartefakt.</p></article><article><span class="slot-status">Inhalt in Freigabe</span><h3>Ergebnisbeleg</h3><p>Platz für einen verifizierten Beleg – ohne Dummy-Zahlen oder Wirkungsbehauptungen.</p><details><summary>Alternative: zweites Arbeitsartefakt</summary><p>Wird verwendet, falls kein belastbarer Ergebnisbeleg freigegeben werden kann.</p></details></article></div></div></section>
+      <section class="section responsibility" data-reveal><div class="section-label">04 / Verantwortung</div><div><p class="eyebrow">Direkte Zusammenarbeit</p><h2>Klare Zuständigkeiten.<br /><em>Kurze Wege.</em></h2><p class="lead">Du arbeitest direkt mit den Menschen, die Entscheidungen vorbereiten und Lösungen umsetzen. Namen, Profile und Bildmaterial folgen erst nach Bestätigung.</p><div class="team-grid"><article><div class="role-visual" aria-hidden="true"></div><span>Rolle in Bestätigung</span><h3>Technische Strategie & Beratung</h3></article><article><div class="role-visual" aria-hidden="true"></div><span>Rolle in Bestätigung</span><h3>Shopware Engineering & Integration</h3></article><article><div class="role-visual" aria-hidden="true"></div><span>Rolle in Bestätigung</span><h3>Betrieb & Weiterentwicklung</h3></article></div></div></section>
+      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser technischer Fokus. Beratung, Integrationen, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsziel es erfordert.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt ein Projekt?</summary><p>Mit einem fokussierten Gespräch zu Ausgangslage, Ziel und größtem Risiko. Danach schlagen wir einen klar abgegrenzten ersten Schritt vor.</p></details><details><summary>Wie funktionieren Übergabe und Betrieb?</summary><p>Entscheidungen und Änderungen werden nachvollziehbar dokumentiert. Das konkrete Betriebsmodell klären wir passend zu deinem System und deinem Team.</p></details><details><summary>Wann ist KI der richtige Ansatz?</summary><p>Wenn ein konkreter Prozess, geeignete Daten und ein überprüfbares Ziel zusammenkommen. Wenn eine einfachere Lösung sinnvoller ist, sagen wir das ebenfalls.</p></details><a class="section-cta" href="#contact">Projekt besprechen ↗</a></div></section>
 
       <section class="statement" data-reveal><p>Komplexität verschwindet nicht.</p><h2>Aber sie lässt sich<br /><em>beherrschen.</em></h2></section>
 
       <section id="contact" class="contact" data-reveal>
-        <p class="eyebrow">Bereit für den nächsten Schritt?</p><h2>Lass uns dein Vorhaben<br />zuerst sauber <em>einordnen.</em></h2>
-        <a href="mailto:info@digital-forces.de">Projekt besprechen <span>↗</span></a>
+        <p class="eyebrow">Der nächste sinnvolle Schritt</p><h2>Lass uns dein Vorhaben<br />zuerst sauber <em>einordnen.</em></h2><p class="contact-intro">In einem ersten Gespräch klären wir Ausgangslage, Ziel und den sinnvollsten nächsten Schritt. Du erhältst eine ehrliche Einschätzung – auch dann, wenn noch kein Entwicklungsprojekt nötig ist.</p><div class="contact-facts"><span>30 Minuten</span><span>Kostenfrei & unverbindlich</span><span>Videocall · Telefon auf Wunsch</span></div><ol class="contact-steps"><li>Du beschreibst kurz dein Vorhaben oder das aktuelle Problem.</li><li>Wir prüfen, wer fachlich für das Gespräch sinnvoll ist.</li><li>Wir klären Ziel, Risiken und einen möglichen ersten Schritt.</li><li>Du erhältst eine klare Einordnung statt eines vorschnellen Angebots.</li></ol>
+        <a href="mailto:info@digital-forces.de?subject=Shopware-Projekt%20besprechen">Projekt besprechen <span>↗</span></a><p class="contact-help">Schick uns vorab drei kurze Angaben: Was soll sich verbessern? Was blockiert aktuell? Gibt es einen relevanten Zeitrahmen?</p>
         <footer><span>DigitalForces · digital-forces.de</span><span>Impressum / Datenschutz · Review-Status</span><a href="mailto:info@digital-forces.de">info@digital-forces.de</a></footer>
       </section>
     </main>

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/briefing.css';
 import '../styles/qa.css';
+import '../styles/iteration.css';
 const { title, description } = Astro.props;
 const isPreview = import.meta.env.GITHUB_PAGES_PREVIEW === 'true';
 ---
@@ -45,12 +46,6 @@ const isPreview = import.meta.env.GITHUB_PAGES_PREVIEW === 'true';
         });
       });
       if (tabs[0]) activateTab(tabs[0]);
-      document.querySelectorAll('[data-hero]').forEach((button) => button.addEventListener('click', () => {
-        document.querySelectorAll('[data-hero]').forEach((item) => item.setAttribute('aria-pressed', 'false'));
-        button.setAttribute('aria-pressed', 'true');
-        const copy = document.querySelector('[data-hero-copy]');
-        if (copy) copy.innerHTML = copy.getAttribute(button.getAttribute('data-hero') === 'result' ? 'data-result' : 'data-problem') || '';
-      }));
     </script>
   </body>
 </html>
