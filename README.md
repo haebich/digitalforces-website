@@ -22,3 +22,7 @@ npm run dev
 - freigegebene Cases, Leistungsbeschreibungen und Bildwelt
 - rechtlich geprüfte Impressums- und Datenschutztexte
 - finale Hosting- und Analytics-Entscheidung
+
+## Privater Review
+
+Jeder Push auf `main` erzeugt in GitHub Actions ein statisches Artefakt namens `digitalforces-website-review`. Es ist nur für berechtigte Repository-Nutzer abrufbar, wird 14 Tage aufbewahrt und veröffentlicht keine Website. Nach dem Download kann `dist/index.html` lokal geprüft oder der Ordner mit einem lokalen HTTP-Server geöffnet werden.
