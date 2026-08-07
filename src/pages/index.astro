@@ -24,10 +24,10 @@ const featuredCase = approvedCases[0]?.data;
           fetchpriority="high"
           decoding="async"
         />
-        <div class="hero-kicker"><span></span> Shopware Engineering · E-Commerce Consulting</div>
+        <div class="hero-kicker"><span></span> Shopware Engineering · E-Commerce-Beratung</div>
         <h1>Shopware,<br /><em>das belastbar</em><br />funktioniert.</h1>
         <div class="hero-bottom">
-          <div><p>Wir stabilisieren und entwickeln Shopware-Systeme weiter, wenn Schnittstellen, individuelle Prozesse oder gewachsene Technik den nächsten Schritt ausbremsen.</p><p class="hero-qualifier">Für bestehende B2B- und B2C-Shops mit technischem Weiterentwicklungsbedarf.</p><div class="hero-actions"><a class="text-link" href="#contact">Erstgespräch vereinbaren ↗</a><a class="secondary-link" href="#expertise">Leistungen ansehen ↓</a></div><small class="cta-microcopy">30 Minuten · kostenfrei · unverbindlich</small></div>
+          <div><p>Wir stabilisieren und entwickeln Shopware-Systeme weiter, wenn Schnittstellen, individuelle Prozesse oder gewachsene Technik den nächsten Schritt ausbremsen.</p><p class="hero-qualifier">Für bestehende B2B- und B2C-Shops mit technischem Weiterentwicklungsbedarf.</p><div class="hero-actions"><a class="text-link" href="#kontakt">Erstgespräch vereinbaren ↗</a><a class="secondary-link" href={withBase(routes.services)}>Leistungen ansehen →</a></div><small class="cta-microcopy">30 Minuten · kostenfrei · unverbindlich</small></div>
         </div>
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
       </section>
@@ -38,8 +38,8 @@ const featuredCase = approvedCases[0]?.data;
           <h2 id="entry-signal-title">Erst einordnen. Dann gezielt weiterentwickeln.</h2>
           <p>Wir klären, was dein System bremst, welcher Schritt sinnvoll ist und was bewusst warten kann.</p>
           <div class="entry-signal-actions">
-            <a href="#contact">Erstgespräch vereinbaren ↗</a>
-            <a href="#situation">Ausgangslage ansehen ↓</a>
+            <a href="#kontakt">Erstgespräch vereinbaren ↗</a>
+            <a href="#ausgangslage">Ausgangslage ansehen ↓</a>
           </div>
         </div>
         <ol class="entry-signal-points">
@@ -48,13 +48,14 @@ const featuredCase = approvedCases[0]?.data;
           <li><span>03</span><strong>Einen klar abgegrenzten nächsten Schritt wählen</strong></li>
         </ol>
       </section>
-      <section id="situation" class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><p class="lead compact">Langsame Releases, manuelle Umwege und instabile Integrationen sind selten Einzelprobleme. Wir betrachten Shop, Prozesse, Daten und Betrieb gemeinsam – damit nicht nur das nächste Ticket verschwindet, sondern die Ursache klar wird.</p><div class="flow"><span>Änderungen werden riskant</span><b>→</b><span>Systeme greifen nicht ineinander</span><b>→</b><span>Kontext bleibt unklar</span><strong>Analyse → Lösungsschnitt → Umsetzung → Weiterentwicklung</strong></div></div></section>
+      <section id="ausgangslage" class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><p class="lead compact">Langsame Releases, manuelle Umwege und instabile Integrationen sind selten Einzelprobleme. Wir betrachten Shop, Prozesse, Daten und Betrieb gemeinsam – damit nicht nur das nächste Ticket verschwindet, sondern die Ursache klar wird.</p><div class="flow"><span>Änderungen werden riskant</span><b>→</b><span>Systeme greifen nicht ineinander</span><b>→</b><span>Kontext bleibt unklar</span><strong>Analyse → Lösungsschnitt → Umsetzung → Weiterentwicklung</strong></div></div></section>
 
       <section id="expertise" class="section expertise" data-reveal>
         <div class="section-label">01 / Expertise</div>
         <div>
           <p class="eyebrow">Was wir lösen</p>
           <h2>Technik, die dem<br />Geschäft <em>dient.</em></h2>
+          <p class="lead compact">Shopware ist unser technischer Fokus. Beratung, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsmodell und deine Abläufe es erfordern.</p>
           <div class="service-grid">
             <div class="service-list" role="tablist" aria-label="Leistungswege">
               {services.map(({ title }, index) => (
@@ -65,12 +66,12 @@ const featuredCase = approvedCases[0]?.data;
             </div>
             <aside>{services.map(({ title, situation, outcome, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
           </div>
-          <div class="section-actions"><a class="section-cta" href={withBase(routes.services)}>Alle Leistungen ansehen →</a><a class="section-cta section-cta-secondary" href="#contact">Erstgespräch vereinbaren ↗</a></div>
+          <div class="section-actions"><a class="section-cta" href={withBase(routes.services)}>Leistungen ansehen →</a><a class="section-cta section-cta-secondary" href="#kontakt">Erstgespräch vereinbaren ↗</a></div>
         </div>
       </section>
 
       <section id="shopware" class="statement" data-reveal><p>Shopware ist unser technischer Fokus.</p><h2>Dein Geschäftsziel<br />bleibt der <em>Maßstab.</em></h2></section>
-      <section id="approach" class="section approach" data-reveal>
+      <section id="arbeitsweise" class="section approach" data-reveal>
         <div class="section-label">02 / Arbeitsweise</div>
         <div>
           <p class="eyebrow">Klarer Prozess</p><h2>Klare Entscheidungen.<br /><em>Saubere Umsetzung.</em></h2>
@@ -92,13 +93,13 @@ const featuredCase = approvedCases[0]?.data;
           </div>
         </div>
       </section>
-      {featuredCase && <section id="project" class="section proof" data-reveal><div class="section-label">03 / Projekt</div><div><p class="eyebrow">Ausgewähltes Projekt</p><h2>Shopware im<br /><em>praktischen Einsatz.</em></h2><div class="proof-grid proof-grid-single"><article class="proof-case"><div class="proof-visual" aria-label="Neutraler visueller Platzhalter"><span>Neutraler Layout-Platzhalter · Assetfreigabe offen</span></div><span class="slot-status">{featuredCase.eyebrow}</span><h3>{featuredCase.title}</h3><p>{featuredCase.summary}</p><p class="proof-services">{featuredCase.services.join(' · ')}</p></article></div><a class="section-cta" href={withBase(routes.references)}>Referenz ansehen →</a></div></section>}
+      {featuredCase && <section id="referenz" class="section proof" data-reveal><div class="section-label">03 / Referenz</div><div><p class="eyebrow">Ausgewählte Referenz</p><h2>Shopware im<br /><em>praktischen Einsatz.</em></h2><div class="proof-grid proof-grid-single"><article class="proof-case"><div class="proof-visual" aria-hidden="true"></div><span class="slot-status">{featuredCase.eyebrow}</span><h3>{featuredCase.title}</h3><p>{featuredCase.summary}</p><p class="proof-services">{featuredCase.services.join(' · ')}</p></article></div><a class="section-cta" href={withBase(routes.references)}>Referenzen ansehen →</a></div></section>}
       <section class="section responsibility responsibility-compact" data-reveal><div class="section-label">04 / Zusammenarbeit</div><div><p class="eyebrow">Direkte Zusammenarbeit</p><h2>Klare Zuständigkeiten.<br /><em>Kurze Wege.</em></h2><p class="lead">Technische Strategie, Shopware Engineering und laufende Weiterentwicklung greifen direkt ineinander. Du sprichst mit den Menschen, die Entscheidungen vorbereiten und Lösungen umsetzen.</p></div></section>
-      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser technischer Fokus. Beratung, Integrationen, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsziel es erfordert.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt ein Projekt?</summary><p>Mit einem fokussierten Gespräch zu Ausgangslage, Ziel und größtem Risiko. Danach schlagen wir einen klar abgegrenzten ersten Schritt vor.</p></details><details><summary>Wie funktionieren Übergabe und Betrieb?</summary><p>Entscheidungen und Änderungen werden nachvollziehbar dokumentiert. Das konkrete Betriebsmodell klären wir passend zu deinem System und deinem Team.</p></details><details><summary>Wann ist KI der richtige Ansatz?</summary><p>Wenn ein konkreter Prozess, geeignete Daten und ein überprüfbares Ziel zusammenkommen. Wenn eine einfachere Lösung sinnvoller ist, sagen wir das ebenfalls.</p></details><a class="section-cta" href="#contact">Erstgespräch vereinbaren ↗</a></div></section>
+      <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser technischer Fokus. Beratung, Integrationen, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsziel es erfordert.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt ein Projekt?</summary><p>Mit einem fokussierten Gespräch zu Ausgangslage, Ziel und größtem Risiko. Danach schlagen wir einen klar abgegrenzten ersten Schritt vor.</p></details><details><summary>Wie funktionieren Übergabe und Betrieb?</summary><p>Entscheidungen und Änderungen werden nachvollziehbar dokumentiert. Das konkrete Betriebsmodell klären wir passend zu deinem System und deinem Team.</p></details><details><summary>Wann ist KI der richtige Ansatz?</summary><p>Wenn ein konkreter Prozess, geeignete Daten und ein überprüfbares Ziel zusammenkommen. Wenn eine einfachere Lösung sinnvoller ist, sagen wir das ebenfalls.</p></details><a class="section-cta" href="#kontakt">Erstgespräch vereinbaren ↗</a></div></section>
 
       <section class="statement" data-reveal><p>Komplexität verschwindet nicht.</p><h2>Aber sie lässt sich<br /><em>beherrschen.</em></h2></section>
 
-      <section id="contact" class="contact" data-reveal>
+      <section id="kontakt" class="contact" data-reveal>
         <p class="eyebrow">Der nächste sinnvolle Schritt</p><h2>Lass uns dein Vorhaben<br />zuerst sauber <em>einordnen.</em></h2><p class="contact-intro">In einem ersten Gespräch klären wir Ausgangslage, Ziel und den sinnvollsten nächsten Schritt. Du erhältst eine ehrliche Einschätzung – auch dann, wenn noch kein Entwicklungsprojekt nötig ist.</p><div class="contact-facts"><span>30 Minuten · kostenfrei · unverbindlich</span><span>Videocall · Telefon auf Wunsch</span></div><ol class="contact-steps"><li>Du beschreibst kurz dein Vorhaben oder das aktuelle Problem.</li><li>Wir prüfen, wer fachlich für das Gespräch sinnvoll ist.</li><li>Wir klären Ziel, Risiken und einen möglichen ersten Schritt.</li><li>Du erhältst eine klare Einordnung statt eines vorschnellen Angebots.</li></ol>
         <a href="mailto:info@digital-forces.de?subject=Shopware-Erstgespr%C3%A4ch">Erstgespräch vereinbaren <span>↗</span></a><p class="contact-help">Schick uns vorab drei kurze Angaben: Was soll sich verbessern? Was blockiert aktuell? Gibt es einen relevanten Zeitrahmen?</p>
       </section>

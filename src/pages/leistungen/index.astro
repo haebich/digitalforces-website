@@ -9,16 +9,16 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 ---
 <Base
   pathname="/leistungen/"
-  title="Leistungen | Shopware, E-Commerce und Entwicklung | DigitalForces"
-  description="Shopware Engineering, E-Commerce Business Consulting, KI-Consulting und individuelle Entwicklung – mit klar abgegrenztem Einstieg."
+  title="Leistungen für Shopware und E-Commerce | DigitalForces"
+  description="Shopware Engineering, E-Commerce-Beratung, KI-Consulting und individuelle Entwicklung für Systeme mit technischem Weiterentwicklungsbedarf."
 >
   <div class="route-shell">
     <Header currentPath={Astro.url.pathname} />
     <main id="main-content">
       <header class="route-hero">
         <p class="eyebrow">Leistungen</p>
-        <h1>Technik und Beratung für anspruchsvollen E-Commerce.</h1>
-        <p>Shopware bleibt unser technischer Anker. Beratung, KI und individuelle Entwicklung ergänzen ihn dort, wo Prozesse, Daten oder Geschäftsziele es sinnvoll machen.</p>
+        <h1>Leistungen, die dein System weiterbringen.</h1>
+        <p>Nicht jede Herausforderung braucht sofort mehr Entwicklung. Wir schaffen zuerst Klarheit über System, Prozess und Priorität – und setzen danach den passenden Schritt um.</p>
       </header>
 
       <section class="route-intro" aria-labelledby="services-intro">
@@ -35,15 +35,13 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
           <article id={data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}>
             <span class="catalog-index">0{index + 1}</span>
             <div class="catalog-main">
-              <p class="eyebrow">{data.summary}</p>
               <h2>{data.title}</h2>
+              <p class="catalog-description">{data.text}</p>
               <dl>
-                <div><dt>Typische Ausgangslage</dt><dd>{data.situation}</dd></div>
-                <div><dt>Angestrebtes Ergebnis</dt><dd>{data.outcome}</dd></div>
+                <div><dt>Leistungsrahmen</dt><dd>{data.scopeText}</dd></div>
                 <div><dt>Sinnvoller Einstieg</dt><dd>{data.entry}</dd></div>
               </dl>
             </div>
-            <ul aria-label={`Leistungsrahmen ${data.title}`}>{data.scope.map((item) => <li>{item}</li>)}</ul>
           </article>
         ))}
       </section>

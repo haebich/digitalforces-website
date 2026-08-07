@@ -8,9 +8,11 @@ const services = defineCollection({
     order: z.number().int().positive(),
     title: z.string(),
     summary: z.string(),
+    text: z.string(),
     situation: z.string(),
     outcome: z.string(),
     scope: z.array(z.string()).min(1),
+    scopeText: z.string(),
     entry: z.string(),
   }),
 });

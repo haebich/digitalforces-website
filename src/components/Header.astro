@@ -1,5 +1,5 @@
 ---
-import { contactHref, routes, withBase } from '../config/site';
+import { routes, withBase } from '../config/site';
 
 interface Props {
   currentPath?: string;
@@ -11,8 +11,8 @@ const normalizedPath = currentPath.replace(base, '') || '/';
 const links = [
   { href: withBase(routes.services), label: 'Leistungen', path: routes.services },
   { href: withBase(routes.references), label: 'Referenzen', path: routes.references },
-  { href: `${withBase(routes.home)}#approach`, label: 'Arbeitsweise', path: '/#approach' },
-  { href: contactHref(), label: 'Kontakt', path: 'mailto:' },
+  { href: `${withBase(routes.home)}#arbeitsweise`, label: 'Arbeitsweise', path: '/#arbeitsweise' },
+  { href: `${withBase(routes.home)}#kontakt`, label: 'Kontakt', path: '/#kontakt' },
 ];
 ---
 <header class="site-header">
@@ -20,12 +20,12 @@ const links = [
   <nav aria-label="Hauptnavigation">
     {links.map((link) => <a href={link.href} aria-current={normalizedPath === link.path ? 'page' : undefined}>{link.label}</a>)}
   </nav>
-  <a class="header-cta" href={contactHref()}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
+  <a class="header-cta" href={`${withBase(routes.home)}#kontakt`}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
   <details class="mobile-nav">
     <summary>Menü</summary>
     <nav aria-label="Mobile Navigation">
       {links.map((link) => <a href={link.href} aria-current={normalizedPath === link.path ? 'page' : undefined}>{link.label}</a>)}
-      <a href={contactHref()}>Erstgespräch vereinbaren</a>
+      <a href={`${withBase(routes.home)}#kontakt`}>Erstgespräch vereinbaren</a>
     </nav>
   </details>
 </header>

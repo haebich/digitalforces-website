@@ -126,10 +126,11 @@ for (const width of widths) {
     const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
     results.push({ route, width, passed, ...state, requestFailures, badResponses, externalRequests: [...new Set(externalRequests)] });
 
-    if ((route === '/' || route === '/referenzen/') && (width === 1440 || width === 390)) {
+    if ((route === '/' || route === '/leistungen/' || route === '/referenzen/') && (width === 1440 || width === 390)) {
       await evaluate(page.sessionId, "document.querySelectorAll('[data-reveal]').forEach((element) => element.classList.add('is-visible'));");
       const { data } = await call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, fromSurface: true }, page.sessionId);
-      const name = `${route === '/' ? 'home' : 'referenzen'}-${width}.png`;
+      const routeName = route === '/' ? 'home' : route.replaceAll('/', '');
+      const name = `${routeName}-${width}.png`;
       await writeFile(resolve(outputDir, name), Buffer.from(data, 'base64'));
     }
     socket.removeEventListener('message', eventListener);

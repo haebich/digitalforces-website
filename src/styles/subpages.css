@@ -16,13 +16,13 @@
 .route-intro h2,.route-process h2{font-size:clamp(50px,7vw,104px);margin:20px 0 55px}
 .route-intro .lead{max-width:830px}
 .service-catalog{padding:0 4vw 140px}
-.service-catalog>article{display:grid;grid-template-columns:12% minmax(0,1.5fr) minmax(240px,.65fr);gap:5vw;padding:70px 0;border-top:1px solid var(--line);scroll-margin-top:24px}
+.service-catalog>article{display:grid;grid-template-columns:12% minmax(0,1fr);gap:5vw;padding:70px 0;border-top:1px solid var(--line);scroll-margin-top:24px}
 .catalog-index{color:#41504b;font:12px ui-monospace,SFMono-Regular,Consolas,monospace}
 .catalog-main>.eyebrow{max-width:680px;line-height:1.6;color:#51605b}
 .catalog-main h2{font-size:clamp(42px,5vw,72px);line-height:.98;margin:18px 0 42px}
+.catalog-description{max-width:760px;margin:-12px 0 38px;font-size:18px;line-height:1.65;color:#42514c}
 .catalog-main dl{margin:0}.catalog-main dl div{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:18px 0;border-top:1px solid var(--line)}
 .catalog-main dt{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em}.catalog-main dd{margin:0;line-height:1.6;color:#42514c}
-.service-catalog article>ul{margin:34px 0 0;padding:0;list-style:none}.service-catalog article>ul li{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
 .route-process{background:#deddd5}.route-process ol{margin:45px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}.route-process li{display:grid;grid-template-columns:70px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}.route-process li span{font:12px ui-monospace,SFMono-Regular,Consolas,monospace}.route-process li strong{font-size:20px;font-weight:500}
 .route-contact{padding:130px 4vw;background:var(--ink);color:white;text-align:center}.route-contact .eyebrow{color:var(--lime)}.route-contact h2{max-width:1080px;margin:32px auto;font-size:clamp(54px,7vw,104px);line-height:.96}.route-contact>p:not(.eyebrow){max-width:680px;margin:0 auto;color:#b5c0bc;font-size:18px;line-height:1.65}.route-contact>a{display:inline-flex;margin-top:42px;padding:18px 22px;background:var(--lime);color:var(--ink);text-decoration:none;gap:30px}.route-contact small{display:block;margin-top:18px;color:#94a19c;font:11px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em}
 .route-hero-references:after{background:linear-gradient(135deg,transparent 35%,rgba(200,255,53,.07)),repeating-linear-gradient(90deg,transparent 0,transparent calc(12.5% - 1px),rgba(255,255,255,.04) 12.5%)}

@@ -9,33 +9,23 @@ const cases = (await getCollection('cases', ({ data }) => data.publicationStatus
 ---
 <Base
   pathname="/referenzen/"
-  title="E-Commerce-Projekte und Referenzen | DigitalForces"
-  description="Ausgewählte DigitalForces-Projekte mit nachvollziehbarem Leistungsrahmen – ohne unbelegte Wirkungsversprechen."
+  title="Referenzen und E-Commerce-Projekte | DigitalForces"
+  description="Ausgewählte Shopware- und E-Commerce-Projekte von DigitalForces – mit nachvollziehbarem Leistungsrahmen statt unbelegter Wirkungsversprechen."
 >
   <div class="route-shell">
     <Header currentPath={Astro.url.pathname} />
     <main id="main-content">
       <header class="route-hero route-hero-references">
         <p class="eyebrow">Projekte und Referenzen</p>
-        <h1>Shopware und E-Commerce im praktischen Einsatz.</h1>
-        <p>Wir zeigen Projektarbeit mit nachvollziehbarem Leistungsrahmen. Keine Logo-Sammlung, keine erfundenen Zahlen und keine Wirkung ohne Beleg.</p>
+        <h1>Ausgewählte Projekte. Klarer Leistungsrahmen.</h1>
+        <p>Wir zeigen Projektarbeit dann, wenn unser Beitrag nachvollziehbar beschrieben werden kann. Keine geschätzten Wirkungszahlen und keine Logo-Sammlung ohne Kontext.</p>
       </header>
-
-      <section class="route-intro" aria-labelledby="references-intro">
-        <p class="section-label">01 / Referenzen</p>
-        <div>
-          <p class="eyebrow">Belegbare Projektarbeit</p>
-          <h2 id="references-intro">Weniger Behauptung.<br /><em>Mehr Kontext.</em></h2>
-          <p class="lead">Jede veröffentlichte Referenz braucht bestätigte Fakten, einen klaren DigitalForces-Anteil und separat freigegebene Assets.</p>
-        </div>
-      </section>
 
       <section class="case-list" aria-label="Freigegebene Referenzen">
         {cases.map(({ data }, index) => (
           <article>
-            <div class="case-visual" aria-label="Neutraler visueller Platzhalter">
+            <div class="case-visual" aria-hidden="true">
               <span>0{index + 1}</span>
-              <small>Bildmaterial nicht freigegeben</small>
             </div>
             <div class="case-copy">
               <p class="eyebrow">{data.eyebrow}</p>
