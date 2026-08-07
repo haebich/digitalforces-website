@@ -152,6 +152,9 @@ for (const width of widths) {
           imageNaturalWidth: image?.naturalWidth ?? 0,
           imageCurrentSrc: image?.currentSrc ?? '',
           imageAlt: image?.alt ?? '',
+          serviceTabs: document.querySelectorAll('[data-service]').length,
+          servicePanels: document.querySelectorAll('[data-service-panel]').length,
+          serviceDetailLinks: document.querySelectorAll('[data-service-panel] .catalog-link').length,
         };
       })(),
       migrationUiReady: ${!migrationRoutes.includes(route)} || (() => {
@@ -191,7 +194,10 @@ for (const width of widths) {
       && state.homeUiDetails.imageComplete
       && state.homeUiDetails.imageNaturalWidth === 1536
       && state.homeUiDetails.imageCurrentSrc.endsWith('/assets/df-code-card-engineering-visual-v1.webp')
-      && state.homeUiDetails.imageAlt === 'Abstrakte Visualisierung von digitalem Engineering und modularen Systemen.');
+      && state.homeUiDetails.imageAlt === 'Abstrakte Visualisierung von digitalem Engineering und modularen Systemen.'
+      && state.homeUiDetails.serviceTabs === 6
+      && state.homeUiDetails.servicePanels === 6
+      && state.homeUiDetails.serviceDetailLinks === 6);
     const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.ogUrl === expectedCanonical && state.robots === expectedRobots && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && homeUiReady && state.migrationUiReady && state.serviceUiReady && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
     results.push({ route, width, passed, ...state, homeUiReady, requestFailures, badResponses, externalRequests: [...new Set(externalRequests)] });
 
