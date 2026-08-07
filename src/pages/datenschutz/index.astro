@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { legalReview } from '../../config/legal';
+import { site } from '../../config/site';
+
+const { provider, unresolved } = legalReview;
+---
+<Base
+  pathname="/datenschutz/"
+  robots="noindex, follow"
+  title="Datenschutz | DigitalForces"
+  description="Informationen zum Datenschutz bei DigitalForces."
+>
+  <div class="route-shell legal-shell">
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <header class="legal-hero">
+        <p class="eyebrow">Rechtliche Informationen</p>
+        <h1>Datenschutz</h1>
+        <aside class="review-banner" role="note"><strong>Review-Status</strong><span>{legalReview.status}</span><small>Gilt für den geplanten Launch ohne Analytics, Buchungssystem oder Kontaktformular.</small></aside>
+      </header>
+      <article class="legal-content">
+        <section>
+          <h2>1. Verantwortlicher</h2>
+          <address>{provider.businessName} · Inhaber {provider.owner}<br />{provider.street} · {provider.postalCode} {provider.city} · {provider.country}<br /><a href={`mailto:${site.email}`}>{site.email}</a> · {provider.phone}</address>
+        </section>
+        <section>
+          <h2>2. Hosting und Bereitstellung</h2>
+          <p>Beim Aufruf der Website verarbeitet der Hostinganbieter technisch erforderliche Verbindungsdaten. Dazu können IP-Adresse, Zeitpunkt, aufgerufene URL, Referrer, Browser- und Geräteinformationen sowie HTTP-Status gehören.</p>
+          <p>Die Verarbeitung dient der sicheren, stabilen und fehlerfreien Bereitstellung sowie der Abwehr technischer Angriffe. Rechtsgrundlage ist, soweit einschlägig, Art. 6 Abs. 1 lit. f DSGVO.</p>
+          <p class="legal-todo"><strong>Vor Veröffentlichung:</strong> {unresolved.hosting}</p>
+        </section>
+        <section>
+          <h2>3. Kontaktaufnahme per E-Mail</h2>
+          <p>Wenn du uns per E-Mail kontaktierst, verarbeiten wir die übermittelten Angaben zur Bearbeitung deiner Anfrage. Bei vorvertraglichen oder vertraglichen Anfragen erfolgt dies auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, in anderen Fällen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
+          <p class="legal-todo"><strong>Vor Veröffentlichung:</strong> {unresolved.mail}</p>
+        </section>
+        <section>
+          <h2>4. Cookies, lokale Speicherung und Tracking</h2>
+          <p>Zum beschlossenen Launch werden keine Analytics-, Marketing-, Tag-Manager-, Pixel- oder Session-Replay-Dienste eingesetzt. Ein Buchungs- oder Kalendersystem ist ebenfalls nicht vorgesehen.</p>
+          <p>Die statische Website soll keine einwilligungspflichtigen Cookies oder vergleichbaren Endeinrichtungszugriffe verwenden. Dies wird vor dem Launch technisch verifiziert.</p>
+        </section>
+        <section>
+          <h2>5. Eingebundene Inhalte und externe Dienste</h2>
+          <p>Schriften und Bilder werden lokal ausgeliefert. Beim Seitenaufruf sollen keine externen Karten, Videos, Social-Media-Widgets oder sonstigen Drittinhalte automatisch geladen werden.</p>
+        </section>
+        <section>
+          <h2>6. Speicherdauer und Empfänger</h2>
+          <p>Personenbezogene Daten erhalten nur Stellen, die sie für Betrieb, Sicherheit oder die Bearbeitung von Anfragen benötigen. Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck erforderlich ist oder gesetzliche Pflichten bestehen.</p>
+          <p class="legal-todo"><strong>Vor Veröffentlichung:</strong> Konkrete Empfänger, Unterauftragnehmer, Serverlog- und E-Mail-Fristen nach Providerbestätigung ergänzen.</p>
+        </section>
+        <section>
+          <h2>7. Deine Rechte</h2>
+          <p>Nach Maßgabe der gesetzlichen Voraussetzungen bestehen insbesondere Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde.</p>
+        </section>
+        <section class="review-open-items">
+          <h2>Vor Veröffentlichung offen</h2>
+          <ul><li>{unresolved.hosting}</li><li>{unresolved.mail}</li><li>{unresolved.dataProtectionOfficer}</li></ul>
+        </section>
+      </article>
+    </main>
+    <SiteFooter />
+  </div>
+</Base>

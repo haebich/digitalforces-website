@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { routes, withBase } from '../config/site';
+---
+<Base pathname="/404/" robots="noindex, follow" title="Seite nicht gefunden | DigitalForces" description="Die angeforderte Seite wurde nicht gefunden.">
+  <div class="route-shell">
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <header class="route-hero error-hero">
+        <p class="eyebrow">404 · Seite nicht gefunden</p>
+        <h1>Hier führt gerade kein sinnvoller Weg weiter.</h1>
+        <p>Die angeforderte Seite existiert nicht oder wurde verschoben.</p>
+        <a class="error-home-link" href={withBase(routes.home)}>Zur Startseite →</a>
+      </header>
+    </main>
+    <SiteFooter />
+  </div>
+</Base>

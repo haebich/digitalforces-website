@@ -1,0 +1,24 @@
+---
+import { contactHref } from '../config/site';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+  subject?: string;
+}
+
+const {
+  eyebrow = 'Der nächste sinnvolle Schritt',
+  title = 'Lass uns dein Vorhaben zuerst sauber einordnen.',
+  text = 'In einem ersten Gespräch klären wir Ausgangslage, Ziel und den sinnvollsten nächsten Schritt.',
+  subject,
+} = Astro.props;
+---
+<section class="route-contact" aria-labelledby="route-contact-title">
+  <p class="eyebrow">{eyebrow}</p>
+  <h2 id="route-contact-title">{title}</h2>
+  <p>{text}</p>
+  <a href={contactHref(subject)}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
+  <small>30 Minuten · kostenfrei · unverbindlich</small>
+</section>

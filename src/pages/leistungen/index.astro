@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import ContactCta from '../../components/ContactCta.astro';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+<Base
+  pathname="/leistungen/"
+  title="Leistungen | Shopware, E-Commerce und Entwicklung | DigitalForces"
+  description="Shopware Engineering, E-Commerce Business Consulting, KI-Consulting und individuelle Entwicklung – mit klar abgegrenztem Einstieg."
+>
+  <div class="route-shell">
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <header class="route-hero">
+        <p class="eyebrow">Leistungen</p>
+        <h1>Technik und Beratung für anspruchsvollen E-Commerce.</h1>
+        <p>Shopware bleibt unser technischer Anker. Beratung, KI und individuelle Entwicklung ergänzen ihn dort, wo Prozesse, Daten oder Geschäftsziele es sinnvoll machen.</p>
+      </header>
+
+      <section class="route-intro" aria-labelledby="services-intro">
+        <p class="section-label">01 / Leistungswege</p>
+        <div>
+          <p class="eyebrow">Passender Lösungsschnitt</p>
+          <h2 id="services-intro">Vier Wege.<br /><em>Ein klares Zielbild.</em></h2>
+          <p class="lead">Wir beginnen nicht mit einem beliebigen Leistungspaket, sondern mit der Frage, was dein System und dein Geschäft als Nächstes wirklich brauchen.</p>
+        </div>
+      </section>
+
+      <section class="service-catalog" aria-label="Leistungsübersicht">
+        {services.map(({ data }, index) => (
+          <article id={data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}>
+            <span class="catalog-index">0{index + 1}</span>
+            <div class="catalog-main">
+              <p class="eyebrow">{data.summary}</p>
+              <h2>{data.title}</h2>
+              <dl>
+                <div><dt>Typische Ausgangslage</dt><dd>{data.situation}</dd></div>
+                <div><dt>Angestrebtes Ergebnis</dt><dd>{data.outcome}</dd></div>
+                <div><dt>Sinnvoller Einstieg</dt><dd>{data.entry}</dd></div>
+              </dl>
+            </div>
+            <ul aria-label={`Leistungsrahmen ${data.title}`}>{data.scope.map((item) => <li>{item}</li>)}</ul>
+          </article>
+        ))}
+      </section>
+
+      <section class="route-process" aria-labelledby="process-title">
+        <p class="section-label">02 / Arbeitsweise</p>
+        <div>
+          <p class="eyebrow">Klare Entscheidungen</p>
+          <h2 id="process-title">Verstehen. Entscheiden. Liefern. Verbessern.</h2>
+          <ol>
+            <li><span>01</span><strong>System, Daten, Ziele und Abhängigkeiten klären.</strong></li>
+            <li><span>02</span><strong>Optionen, Risiken und Konsequenzen transparent machen.</strong></li>
+            <li><span>03</span><strong>In kleinen, prüfbaren und dokumentierten Schritten liefern.</strong></li>
+            <li><span>04</span><strong>Wirkung und Betrieb prüfen und gezielt weiterentwickeln.</strong></li>
+          </ol>
+        </div>
+      </section>
+
+      <ContactCta
+        title="Welcher Einstieg passt zu deinem System?"
+        text="Im Erstgespräch ordnen wir Ausgangslage, Ziel und Abhängigkeiten ein und grenzen einen sinnvollen ersten Schritt ab."
+        subject="Passenden Einstieg klären"
+      />
+    </main>
+    <SiteFooter />
+  </div>
+</Base>

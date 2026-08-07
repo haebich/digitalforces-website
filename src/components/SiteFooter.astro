@@ -1,0 +1,16 @@
+---
+import { contactHref, routes, site, withBase } from '../config/site';
+---
+<footer class="site-footer">
+  <div class="site-footer-brand"><span>Digital</span><b>Forces</b><p>Shopware Engineering · E-Commerce Consulting</p></div>
+  <nav aria-label="Footer Navigation">
+    <a href={withBase(routes.services)}>Leistungen</a>
+    <a href={withBase(routes.references)}>Referenzen</a>
+    <a href={contactHref()}>Erstgespräch vereinbaren</a>
+  </nav>
+  <nav aria-label="Rechtliche Navigation">
+    <a href={withBase(routes.legalNotice)}>Impressum</a>
+    <a href={withBase(routes.privacy)}>Datenschutz</a>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </nav>
+</footer>

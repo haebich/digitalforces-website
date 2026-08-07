@@ -1,18 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { getCollection } from 'astro:content';
+import { routes, withBase } from '../config/site';
 const assetBase = import.meta.env.BASE_URL.replace(/\/$/, '');
-const services = [
-  { name: 'Shopware Engineering', problem: 'Dein Shopware-System ist geschäftskritisch, aber Änderungen, Integrationen oder Betrieb erzeugen unnötige Risiken.', result: 'Eine belastbare technische Grundlage, die sich nachvollziehbar betreiben und weiterentwickeln lässt.', scope: 'Integrationen, Erweiterungen, Performance, Stabilisierung, Betrieb und Weiterentwicklung.', entry: 'Technische Bestandsaufnahme mit priorisierten Handlungsfeldern.' },
-  { name: 'E-Commerce Business Consulting', problem: 'Viele Anforderungen konkurrieren miteinander; technische und geschäftliche Prioritäten sind nicht sauber verbunden.', result: 'Ein klares Zielbild und eine belastbare Roadmap für die nächsten Entscheidungen.', scope: 'Ziele, Prozesse, Priorisierung, Lösungsschnitt und Entscheidungsgrundlagen.', entry: 'Fokussierter Workshop zu Ausgangslage, Zielen und Abhängigkeiten.' },
-  { name: 'KI-Consulting', problem: 'Es gibt Ideen für KI, aber noch keinen belastbaren Anwendungsfall oder Nachweis, dass Aufwand, Datenlage und Nutzen zusammenpassen.', result: 'Eine fundierte Entscheidung: umsetzen, anders lösen oder bewusst verwerfen.', scope: 'Use-Case-Prüfung, Daten- und Risikobewertung, Prototyping und Umsetzungsplanung.', entry: 'Chancencheck für einen konkreten Prozess oder Anwendungsfall.' },
-  { name: 'Individuelle Entwicklung', problem: 'Standardfunktionen und vorhandene Systeme bilden einen wichtigen Geschäftsprozess nicht ausreichend ab.', result: 'Eine passende Erweiterung oder Anwendung mit klaren Schnittstellen und wartbarer Architektur.', scope: 'Individuelle Erweiterungen, Integrationen, interne Werkzeuge und eigenständige Anwendungen.', entry: 'Problem- und Lösungsschnitt vor der ersten Implementierung.' },
-];
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order).map(({ data }) => data);
+const approvedCases = (await getCollection('cases', ({ data }) => data.publicationStatus === 'approved-internal')).sort((a, b) => a.data.order - b.data.order);
+const featuredCase = approvedCases[0]?.data;
 ---
-<Base title="DigitalForces – Shopware, Beratung und individuelle Entwicklung" description="DigitalForces entwickelt und verbessert anspruchsvolle Shopware-Systeme – mit technischer Strategie, E-Commerce-Beratung, KI-Consulting und individueller Entwicklung.">
+<Base pathname="/" title="DigitalForces – Shopware Engineering und E-Commerce-Beratung" description="DigitalForces stabilisiert und entwickelt anspruchsvolle Shopware-Systeme weiter – mit Engineering, E-Commerce-Beratung und individueller Entwicklung.">
   <div id="top" class="page-shell">
-    <Header />
-    <main>
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
       <section class="hero">
         <img
           class="hero-media"
@@ -57,15 +57,15 @@ const services = [
           <h2>Technik, die dem<br />Geschäft <em>dient.</em></h2>
           <div class="service-grid">
             <div class="service-list" role="tablist" aria-label="Leistungswege">
-              {services.map(({ name }, index) => (
+              {services.map(({ title }, index) => (
                 <button id={`service-tab-${index}`} role="tab" data-service aria-controls={`service-panel-${index}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? '0' : '-1'}>
-                  <span>0{index + 1}</span>{name}<b>↗</b>
+                  <span>0{index + 1}</span>{title}<b>↗</b>
                 </button>
               ))}
             </div>
-            <aside>{services.map(({ name, problem, result, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{name}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{problem}</dd></div><div><dt>Ergebnis</dt><dd>{result}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
+            <aside>{services.map(({ title, situation, outcome, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
           </div>
-          <a class="section-cta" href="#contact">Erstgespräch vereinbaren ↗</a>
+          <div class="section-actions"><a class="section-cta" href={withBase(routes.services)}>Alle Leistungen ansehen →</a><a class="section-cta section-cta-secondary" href="#contact">Erstgespräch vereinbaren ↗</a></div>
         </div>
       </section>
 
@@ -92,7 +92,7 @@ const services = [
           </div>
         </div>
       </section>
-      <section id="project" class="section proof" data-reveal><div class="section-label">03 / Projekt</div><div><p class="eyebrow">Ausgewähltes Projekt</p><h2>Shopware im<br /><em>praktischen Einsatz.</em></h2><div class="proof-grid proof-grid-single"><article class="proof-case"><div class="proof-visual" aria-label="Neutraler visueller Platzhalter"><span>Neutraler Layout-Platzhalter · Assetfreigabe offen</span></div><span class="slot-status">Shopware 6 · B2B-Commerce</span><h3>Ein spezialisierter B2B-Shop für Reifenzentrum Watzka.</h3><p>Reifenzentrum Watzka beliefert den Reifen- und Landmaschinenhandel mit einem spezialisierten Sortiment. DigitalForces arbeitet am Shopware-6-System und an individuellen Funktionen für die digitalen Abläufe rund um Sortiment und Bestellung.</p><p class="proof-services">Shopware 6 · individuelle Erweiterungen · technische Weiterentwicklung</p></article></div></div></section>
+      {featuredCase && <section id="project" class="section proof" data-reveal><div class="section-label">03 / Projekt</div><div><p class="eyebrow">Ausgewähltes Projekt</p><h2>Shopware im<br /><em>praktischen Einsatz.</em></h2><div class="proof-grid proof-grid-single"><article class="proof-case"><div class="proof-visual" aria-label="Neutraler visueller Platzhalter"><span>Neutraler Layout-Platzhalter · Assetfreigabe offen</span></div><span class="slot-status">{featuredCase.eyebrow}</span><h3>{featuredCase.title}</h3><p>{featuredCase.summary}</p><p class="proof-services">{featuredCase.services.join(' · ')}</p></article></div><a class="section-cta" href={withBase(routes.references)}>Referenz ansehen →</a></div></section>}
       <section class="section responsibility responsibility-compact" data-reveal><div class="section-label">04 / Zusammenarbeit</div><div><p class="eyebrow">Direkte Zusammenarbeit</p><h2>Klare Zuständigkeiten.<br /><em>Kurze Wege.</em></h2><p class="lead">Technische Strategie, Shopware Engineering und laufende Weiterentwicklung greifen direkt ineinander. Du sprichst mit den Menschen, die Entscheidungen vorbereiten und Lösungen umsetzen.</p></div></section>
       <section class="section faq" data-reveal><div class="section-label">05 / FAQ</div><div><p class="eyebrow">Kurze Antworten</p><h2>Was vor dem Start<br /><em>klar sein sollte.</em></h2><details><summary>Arbeitet ihr nur mit Shopware?</summary><p>Shopware ist unser technischer Fokus. Beratung, Integrationen, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsziel es erfordert.</p></details><details><summary>Übernehmt ihr bestehende Systeme?</summary><p>Ja – nach einer belastbaren Bestandsaufnahme. Wir verändern nichts, bevor Risiken, Rückfallweg und Zielbild klar sind.</p></details><details><summary>Wie beginnt ein Projekt?</summary><p>Mit einem fokussierten Gespräch zu Ausgangslage, Ziel und größtem Risiko. Danach schlagen wir einen klar abgegrenzten ersten Schritt vor.</p></details><details><summary>Wie funktionieren Übergabe und Betrieb?</summary><p>Entscheidungen und Änderungen werden nachvollziehbar dokumentiert. Das konkrete Betriebsmodell klären wir passend zu deinem System und deinem Team.</p></details><details><summary>Wann ist KI der richtige Ansatz?</summary><p>Wenn ein konkreter Prozess, geeignete Daten und ein überprüfbares Ziel zusammenkommen. Wenn eine einfachere Lösung sinnvoller ist, sagen wir das ebenfalls.</p></details><a class="section-cta" href="#contact">Erstgespräch vereinbaren ↗</a></div></section>
 
@@ -101,8 +101,8 @@ const services = [
       <section id="contact" class="contact" data-reveal>
         <p class="eyebrow">Der nächste sinnvolle Schritt</p><h2>Lass uns dein Vorhaben<br />zuerst sauber <em>einordnen.</em></h2><p class="contact-intro">In einem ersten Gespräch klären wir Ausgangslage, Ziel und den sinnvollsten nächsten Schritt. Du erhältst eine ehrliche Einschätzung – auch dann, wenn noch kein Entwicklungsprojekt nötig ist.</p><div class="contact-facts"><span>30 Minuten · kostenfrei · unverbindlich</span><span>Videocall · Telefon auf Wunsch</span></div><ol class="contact-steps"><li>Du beschreibst kurz dein Vorhaben oder das aktuelle Problem.</li><li>Wir prüfen, wer fachlich für das Gespräch sinnvoll ist.</li><li>Wir klären Ziel, Risiken und einen möglichen ersten Schritt.</li><li>Du erhältst eine klare Einordnung statt eines vorschnellen Angebots.</li></ol>
         <a href="mailto:info@digital-forces.de?subject=Shopware-Erstgespr%C3%A4ch">Erstgespräch vereinbaren <span>↗</span></a><p class="contact-help">Schick uns vorab drei kurze Angaben: Was soll sich verbessern? Was blockiert aktuell? Gibt es einen relevanten Zeitrahmen?</p>
-        <footer><span>DigitalForces · digital-forces.de</span><span>Impressum / Datenschutz · Review-Status</span><a href="mailto:info@digital-forces.de">info@digital-forces.de</a></footer>
       </section>
     </main>
+    <SiteFooter />
   </div>
 </Base>

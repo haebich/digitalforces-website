@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { legalReview } from '../../config/legal';
+import { site } from '../../config/site';
+
+const { provider, unresolved } = legalReview;
+---
+<Base
+  pathname="/impressum/"
+  robots="noindex, follow"
+  title="Impressum | DigitalForces"
+  description="Anbieterkennzeichnung von DigitalForces."
+>
+  <div class="route-shell legal-shell">
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <header class="legal-hero">
+        <p class="eyebrow">Rechtliche Informationen</p>
+        <h1>Impressum</h1>
+        <aside class="review-banner" role="note"><strong>Review-Status</strong><span>{legalReview.status}</span><small>Quellenstand: {legalReview.checkedAt}</small></aside>
+      </header>
+      <article class="legal-content">
+        <section>
+          <h2>Anbieter</h2>
+          <address>
+            {provider.businessName}<br />
+            Inhaber: {provider.owner}<br />
+            {provider.street}<br />
+            {provider.postalCode} {provider.city}<br />
+            {provider.country}
+          </address>
+        </section>
+        <section>
+          <h2>Kontakt</h2>
+          <p>Telefon: {provider.phone}<br />E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </section>
+        <section>
+          <h2>Umsatzsteuer</h2>
+          <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />{provider.vatId}</p>
+        </section>
+        <section class="review-open-items">
+          <h2>Vor Veröffentlichung offen</h2>
+          <ul>
+            <li>{unresolved.register}</li>
+            <li>{unresolved.editorialResponsibility}</li>
+            <li>{unresolved.disputeResolution}</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+    <SiteFooter />
+  </div>
+</Base>
