@@ -48,7 +48,28 @@ const featuredCase = approvedCases[0]?.data;
           <li><span>03</span><strong>Einen klar abgegrenzten nächsten Schritt wählen</strong></li>
         </ol>
       </section>
-      <section id="ausgangslage" class="section problem" data-reveal><div class="section-label">00 / Ausgangslage</div><div><p class="eyebrow">Wenn Wachstum Reibung erzeugt</p><h2>Viele Symptome.<br />Ein <em>System.</em></h2><p class="lead compact">Langsame Releases, manuelle Umwege und instabile Integrationen sind selten Einzelprobleme. Wir betrachten Shop, Prozesse, Daten und Betrieb gemeinsam – damit nicht nur das nächste Ticket verschwindet, sondern die Ursache klar wird.</p><div class="flow"><span>Änderungen werden riskant</span><b>→</b><span>Systeme greifen nicht ineinander</span><b>→</b><span>Kontext bleibt unklar</span><strong>Analyse → Lösungsschnitt → Umsetzung → Weiterentwicklung</strong></div></div></section>
+      <section id="ausgangslage" class="section problem" data-reveal>
+        <div class="section-label">00 / Ausgangslage</div>
+        <div>
+          <p class="eyebrow">Wenn Wachstum Reibung erzeugt</p>
+          <h2>Viele Symptome.<br />Ein <em>System.</em></h2>
+          <p class="lead compact">Langsame Releases, manuelle Umwege und instabile Integrationen sind selten Einzelprobleme. Wir betrachten Shop, Prozesse, Daten und Betrieb gemeinsam – damit nicht nur das nächste Ticket verschwindet, sondern die Ursache klar wird.</p>
+          <ul class="problem-signals" aria-label="Typische Signale einer gewachsenen Systemlandschaft">
+            <li>Änderungen werden riskant</li>
+            <li>Systeme greifen nicht ineinander</li>
+            <li>Kontext bleibt unklar</li>
+          </ul>
+          <div class="process-journey" aria-labelledby="process-journey-title">
+            <p id="process-journey-title">Vom Befund zum nächsten belastbaren Schritt</p>
+            <ol>
+              <li><span>01</span><strong>Analyse</strong><small>System und Ausgangslage erfassen.</small></li>
+              <li><span>02</span><strong>Lösungsschnitt</strong><small>Den nächsten Schritt klar abgrenzen.</small></li>
+              <li><span>03</span><strong>Umsetzung</strong><small>In prüfbaren Schritten liefern.</small></li>
+              <li><span>04</span><strong>Weiterentwicklung</strong><small>Wirkung und Betrieb weiter beobachten.</small></li>
+            </ol>
+          </div>
+        </div>
+      </section>
 
       <section id="expertise" class="section expertise" data-reveal>
         <div class="section-label">01 / Expertise</div>
@@ -64,7 +85,20 @@ const featuredCase = approvedCases[0]?.data;
                 </button>
               ))}
             </div>
-            <aside>{services.map(({ title, situation, outcome, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}<div class="code-card"><small>SYSTEMMODELL</small><strong>KLAR</strong><span>prüfbar · wartbar · übergabefähig</span></div></aside>
+            <aside>
+              {services.map(({ title, situation, outcome, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}
+              <figure class="system-visual">
+                <img
+                  src={`${assetBase}/assets/df-code-card-engineering-visual-v1.webp`}
+                  width="1536"
+                  height="1024"
+                  alt="Abstrakte Visualisierung von digitalem Engineering und modularen Systemen."
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption><span>Systemmodell</span><strong>Zusammenhänge sichtbar machen.</strong><small>Technik, Daten und Prozesse in einem gemeinsamen Bild betrachten.</small></figcaption>
+              </figure>
+            </aside>
           </div>
           <div class="section-actions"><a class="section-cta" href={withBase(routes.services)}>Leistungen ansehen →</a><a class="section-cta section-cta-secondary" href="#kontakt">Erstgespräch vereinbaren ↗</a></div>
         </div>

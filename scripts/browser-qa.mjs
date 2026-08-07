@@ -103,6 +103,16 @@ for (const width of widths) {
     socket.addEventListener('message', eventListener);
     const url = new URL(route.replace(/^\//, ''), baseUrl).toString();
     await navigate(page.sessionId, url);
+    if (route === '/') {
+      await evaluate(page.sessionId, `new Promise((resolve) => {
+        const image = document.querySelector('.system-visual img');
+        image?.scrollIntoView({ block: 'center' });
+        if (!image || image.complete) return resolve(Boolean(image?.naturalWidth));
+        const timeout = setTimeout(() => resolve(false), 5000);
+        image.addEventListener('load', () => { clearTimeout(timeout); resolve(true); }, { once: true });
+        image.addEventListener('error', () => { clearTimeout(timeout); resolve(false); }, { once: true });
+      })`);
+    }
     const state = await evaluate(page.sessionId, `(() => ({
       title: document.title,
       h1: document.querySelector('h1')?.textContent?.trim(),
@@ -121,18 +131,41 @@ for (const width of widths) {
       linksWithoutName: [...document.querySelectorAll('a[href]')].filter((link) => !link.textContent?.trim() && !link.getAttribute('aria-label')).length,
       mainCount: document.querySelectorAll('main').length,
       mailtoCount: document.querySelectorAll('a[href^="mailto:"]').length,
+      homeUiReady: ${route !== '/'} || (() => {
+        const journey = document.querySelector('.process-journey');
+        const journeyList = journey?.querySelector('ol');
+        const image = document.querySelector('.system-visual img');
+        const columns = journeyList ? getComputedStyle(journeyList).gridTemplateColumns.split(' ').length : 0;
+        return journey?.querySelectorAll('li').length === 4
+          && journey.scrollWidth <= journey.clientWidth
+          && columns === ${width <= 800 ? 1 : width <= 1100 ? 2 : 4}
+          && image?.complete
+          && image.naturalWidth === 1536
+          && image.currentSrc.endsWith('/assets/df-code-card-engineering-visual-v1.webp')
+          && image.alt === 'Abstrakte Visualisierung von digitalem Engineering und modularen Systemen.';
+      })(),
     }))()`);
 
     const expectedCanonical = expectReleased ? expectedCanonicals.get(route) : null;
-    const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
+    const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && state.homeUiReady && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
     results.push({ route, width, passed, ...state, requestFailures, badResponses, externalRequests: [...new Set(externalRequests)] });
 
-    if ((route === '/' || route === '/leistungen/' || route === '/referenzen/') && (width === 1440 || width === 390)) {
+    if ((route === '/' || route === '/leistungen/' || route === '/referenzen/') && (width === 1440 || width === 390 || (route === '/' && width === 1024))) {
       await evaluate(page.sessionId, "document.querySelectorAll('[data-reveal]').forEach((element) => element.classList.add('is-visible'));");
       const { data } = await call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, fromSurface: true }, page.sessionId);
       const routeName = route === '/' ? 'home' : route.replaceAll('/', '');
       const name = `${routeName}-${width}.png`;
       await writeFile(resolve(outputDir, name), Buffer.from(data, 'base64'));
+      if (route === '/') {
+        for (const [component, selector] of [['process', '.process-journey'], ['system-visual', '.system-visual']]) {
+          const clip = await evaluate(page.sessionId, `(() => {
+            const rect = document.querySelector('${selector}').getBoundingClientRect();
+            return { x: rect.left + scrollX, y: rect.top + scrollY, width: rect.width, height: rect.height, scale: 1 };
+          })()`);
+          const screenshot = await call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, fromSurface: true, clip }, page.sessionId);
+          await writeFile(resolve(outputDir, `home-${component}-${width}.png`), Buffer.from(screenshot.data, 'base64'));
+        }
+      }
     }
     socket.removeEventListener('message', eventListener);
     await closePage(page);
