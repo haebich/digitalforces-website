@@ -3,13 +3,14 @@ import MigrationLanding from '../../components/MigrationLanding.astro';
 import { migrationPages, type MigrationPage } from '../../data/migration-pages';
 import ServiceLanding from '../../components/ServiceLanding.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { publicRoutes } from '../../config/public-routes';
 
 type ServiceData = CollectionEntry<'services'>['data'];
 type ServiceDetailData = ServiceData & { detail: NonNullable<ServiceData['detail']> };
 
 export async function getStaticPaths() {
   const services = await getCollection('services', ({ data }) => Boolean(data.detail));
-  return [
+  const paths = [
     ...migrationPages.map((page) => ({
       params: { slug: page.slug },
       props: { kind: 'migration' as const, page },
@@ -19,6 +20,19 @@ export async function getStaticPaths() {
       props: { kind: 'service' as const, service: data as ServiceDetailData },
     })),
   ];
+  const pathnames = paths.map(({ params }) => `/leistungen/${params.slug}/`);
+  const duplicate = pathnames.find((pathname, index) => pathnames.indexOf(pathname) !== index);
+  if (duplicate) throw new Error(`Doppelte Leistungsroute: ${duplicate}`);
+  for (const { data } of services) {
+    const expectedHref = `/leistungen/${data.detail!.slug}/`;
+    if (data.href !== expectedHref) throw new Error(`Service-Href und Detail-Slug stimmen nicht überein: ${data.href} !== ${expectedHref}`);
+  }
+  const contentServicePaths = services.map(({ data }) => data.href).sort();
+  const configuredServicePaths = publicRoutes.filter(({ kind }) => kind === 'service').map(({ pathname }) => pathname).sort();
+  if (JSON.stringify(contentServicePaths) !== JSON.stringify(configuredServicePaths)) {
+    throw new Error(`Service-Content und Route-Policy weichen voneinander ab: ${contentServicePaths.join(', ')} !== ${configuredServicePaths.join(', ')}`);
+  }
+  return paths;
 }
 
 type Props =

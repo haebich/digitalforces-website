@@ -1,10 +1,11 @@
 ---
-order: 5
+order: 4
 slug: ki-consulting
 href: /leistungen/ki-consulting/
 linkLabel: KI-Consulting ansehen
+cluster: decision
 title: KI-Consulting
-summary: Konkrete Anwendungsfälle anhand von Daten, Nutzen und Risiken nüchtern prüfen.
+summary: Konkrete KI-Anwendungsfälle anhand von Prozess, Daten, Nutzen und Risiken prüfen.
 text: Wenn es Ideen für KI gibt, aber noch kein belastbarer Anwendungsfall und keine klare Grundlage für eine Entscheidung.
 situation: Es gibt Ideen für KI, aber noch keinen belastbaren Anwendungsfall oder Nachweis, dass Aufwand, Datenlage und Nutzen zusammenpassen.
 outcome: Eine fundierte Entscheidung — umsetzen, anders lösen oder bewusst verwerfen.

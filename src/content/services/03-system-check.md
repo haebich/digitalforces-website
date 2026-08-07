@@ -1,10 +1,11 @@
 ---
-order: 3
+order: 1
 slug: system-check
 href: /leistungen/system-check/
 linkLabel: System-Check ansehen
+cluster: decision
 title: System-Check
-summary: Ausgangslage, Abhängigkeiten und den sinnvollsten nächsten Schritt gemeinsam einordnen.
+summary: Shop, Daten, Prozesse und Abhängigkeiten einordnen, bevor der nächste Schritt festgelegt wird.
 text: Wenn ein einzelnes Ticket nicht die ganze Frage beantwortet und Shop, Daten, Prozesse sowie technische Abhängigkeiten gemeinsam betrachtet werden müssen.
 situation: Manuelle Umwege, unklare Datenflüsse oder risikoreiche Änderungen sind miteinander verbunden und lassen sich nicht sinnvoll als Einzelticket entscheiden.
 outcome: Eine belastbare Einordnung für die nächste Entscheidung – weiterentwickeln, zuerst klären, anders zuschneiden oder bewusst warten.

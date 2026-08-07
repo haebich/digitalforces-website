@@ -5,13 +5,14 @@ import Header from '../../components/Header.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import ContactCta from '../../components/ContactCta.astro';
 import { withBase } from '../../config/site';
+import { serviceClusters } from '../../data/service-clusters';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base
   pathname="/leistungen/"
   title="Leistungen für Shopware und E-Commerce | DigitalForces"
-  description="Shopware Engineering, E-Commerce-Beratung, KI-Consulting und individuelle Entwicklung für Systeme mit technischem Weiterentwicklungsbedarf."
+  description="Shopware Engineering, E-Commerce-Beratung, System-Checks, Migrationen, Integrationen und technische Weiterentwicklung für komplexe E-Commerce-Systeme."
 >
   <div class="route-shell">
     <Header currentPath={Astro.url.pathname} />
@@ -26,27 +27,33 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
         <p class="section-label">01 / Leistungswege</p>
         <div>
           <p class="eyebrow">Passender Lösungsschnitt</p>
-          <h2 id="services-intro">Sechs Wege.<br /><em>Ein klares Zielbild.</em></h2>
+          <h2 id="services-intro">Der passende Einstieg.<br /><em>Ein klares Zielbild.</em></h2>
           <p class="lead">Wir beginnen nicht mit einem beliebigen Leistungspaket, sondern mit der Frage, was dein System und dein Geschäft als Nächstes wirklich brauchen.</p>
         </div>
       </section>
 
-      <section class="service-catalog" aria-label="Leistungsübersicht">
-        {services.map(({ data }, index) => (
-          <article id={data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}>
-            <span class="catalog-index">0{index + 1}</span>
-            <div class="catalog-main">
-              <h2>{data.title}</h2>
-              <p class="catalog-description">{data.text}</p>
-              <dl>
-                <div><dt>Leistungsrahmen</dt><dd>{data.scopeText}</dd></div>
-                <div><dt>Sinnvoller Einstieg</dt><dd>{data.entry}</dd></div>
-              </dl>
-              <a class="catalog-link" href={withBase(data.href)}>{data.linkLabel} <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        ))}
-      </section>
+      <div class="service-catalog" aria-label="Leistungsübersicht">
+        {serviceClusters.map((cluster) => {
+          const entries = services.filter(({ data }) => data.cluster === cluster.id);
+          return <section class="service-catalog-cluster" aria-labelledby={`catalog-cluster-${cluster.id}`}>
+            <header><span>0{cluster.order}</span><h2 id={`catalog-cluster-${cluster.id}`}>{cluster.title}</h2></header>
+            {entries.map(({ data }, index) => (
+              <article id={data.slug}>
+                <span class="catalog-index">{String(index + 1).padStart(2, '0')}</span>
+                <div class="catalog-main">
+                  <h3>{data.title}</h3>
+                  <p class="catalog-description">{data.text}</p>
+                  <dl>
+                    <div><dt>Leistungsrahmen</dt><dd>{data.scopeText}</dd></div>
+                    <div><dt>Sinnvoller Einstieg</dt><dd>{data.entry}</dd></div>
+                  </dl>
+                  <a class="catalog-link" href={withBase(data.href)}>{data.linkLabel} <span aria-hidden="true">→</span></a>
+                </div>
+              </article>
+            ))}
+          </section>;
+        })}
+      </div>
 
       <section class="route-process" aria-labelledby="process-title">
         <p class="section-label">02 / Arbeitsweise</p>

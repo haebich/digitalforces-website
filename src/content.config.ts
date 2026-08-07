@@ -9,6 +9,7 @@ const services = defineCollection({
     slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     href: z.string().startsWith('/leistungen/'),
     linkLabel: z.string(),
+    cluster: z.enum(['decision', 'engineering', 'operations']),
     title: z.string(),
     summary: z.string(),
     text: z.string(),
@@ -28,6 +29,7 @@ const services = defineCollection({
       ctaMicrocopy: z.string(),
       contextHeading: z.string(),
       contextText: z.string(),
+      capabilitiesEyebrow: z.string().optional(),
       capabilitiesHeading: z.string(),
       capabilities: z.array(z.object({
         title: z.string(),

@@ -1,10 +1,11 @@
 ---
-order: 1
+order: 5
 slug: shopware-engineering
 href: /leistungen/shopware-engineering/
 linkLabel: Shopware Engineering ansehen
+cluster: engineering
 title: Shopware Engineering
-summary: Shopware-Systeme stabilisieren, integrieren und kontrolliert weiterentwickeln.
+summary: Bestehende Shopware-Systeme technisch weiterentwickeln und komplexe Abhängigkeiten einordnen.
 text: Für Shopware-Systeme, die geschäftskritisch sind und bei Änderungen, Integrationen oder im Betrieb unnötige Risiken erzeugen.
 situation: Dein Shopware-System ist geschäftskritisch, aber Änderungen, Integrationen oder Betrieb erzeugen unnötige Risiken.
 outcome: Eine belastbare technische Grundlage, die sich nachvollziehbar betreiben und weiterentwickeln lässt.
@@ -27,6 +28,7 @@ detail:
   contextHeading: Die technische Grundlage vor dem nächsten Ausbau klären.
   contextText: Nicht jede Herausforderung verlangt eine neue Lösung. Manchmal geht es um eine bestehende Integration, eine Erweiterung oder eine klare Entscheidung über die Reihenfolge. Wir betrachten Shopware-System, Datenflüsse und Betrieb zusammen, damit technische Maßnahmen zum Geschäftsprozess passen.
   capabilitiesHeading: Leistungsbereiche im Shopware Engineering.
+  capabilitiesEyebrow: Was wir konkret einordnen und umsetzen
   capabilities:
     - title: Integrationen und Schnittstellen
       text: Systeme und Datenflüsse einordnen, Verantwortlichkeiten klären und Übergaben nachvollziehbar weiterentwickeln.
@@ -48,12 +50,12 @@ detail:
     - question: Sind Integrationen ein eigenes Projekt?
       answer: Das hängt vom System, Datenfluss und fachlichen Ziel ab. Eine Integration kann Teil einer Weiterentwicklung sein oder einen eigenen, klar abgegrenzten nächsten Schritt bilden.
   relatedLinks:
+    - label: Integrationen und Schnittstellen
+      href: /leistungen/integrationen-schnittstellen/
+    - label: Plugin- und Extension-Entwicklung
+      href: /leistungen/plugin-extension-entwicklung/
     - label: System-Check
       href: /leistungen/system-check/
-    - label: E-Commerce-Beratung
-      href: /leistungen/e-commerce-beratung/
-    - label: Individuelle Entwicklung
-      href: /leistungen/individuelle-entwicklung/
     - label: Shopware-5→6 Migration
       href: /leistungen/shopware-5-auf-6-migration/
   contactSubject: Shopware Engineering – technisches Vorhaben

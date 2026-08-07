@@ -1,10 +1,11 @@
 ---
-order: 6
+order: 9
 slug: individuelle-entwicklung
 href: /leistungen/individuelle-entwicklung/
 linkLabel: Individuelle Entwicklung ansehen
+cluster: engineering
 title: Individuelle Entwicklung
-summary: Standardsoftware gezielt ergänzen, wenn ein Geschäftsprozess mehr verlangt.
+summary: Den Standard gezielt ergänzen, wenn ein wichtiger Prozess mehr braucht.
 text: Wenn Standardfunktionen und vorhandene Systeme einen wichtigen Geschäftsprozess nicht ausreichend abbilden.
 situation: Standardfunktionen und vorhandene Systeme bilden einen wichtigen Geschäftsprozess nicht ausreichend ab.
 outcome: Eine passende Erweiterung oder Anwendung mit klaren Schnittstellen und wartbarer Architektur.
@@ -27,6 +28,7 @@ detail:
   contextHeading: Nicht individuell bauen, weil es möglich ist. Sondern weil es nötig ist.
   contextText: "Individuelle Entwicklung erhöht auch die Verantwortung für Schnittstellen, Betrieb und spätere Weiterentwicklung. Deshalb beginnt sie mit einem klaren Problem- und Lösungsschnitt: Was muss der Prozess leisten, was kann der Standard abdecken und welche Erweiterung ist wirklich sinnvoll?"
   capabilitiesHeading: Individuelle Bausteine mit klarer Abgrenzung.
+  capabilitiesEyebrow: Was wir konkret einordnen und umsetzen
   capabilities:
     - title: Shopware-Erweiterungen
       text: Funktionen für klar abgegrenzte Abläufe ergänzen, wenn Standard und vorhandene Extensions nicht passend reichen.

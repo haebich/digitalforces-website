@@ -3,8 +3,9 @@ order: 2
 slug: e-commerce-beratung
 href: /leistungen/e-commerce-beratung/
 linkLabel: Beratung ansehen
+cluster: decision
 title: E-Commerce-Beratung
-summary: Ziele, Prozesse und technische Entscheidungen zu einer umsetzbaren Roadmap verbinden.
+summary: Ziele, Prioritäten und technische Optionen zu einem gemeinsamen Zielbild verbinden.
 text: Wenn technische und geschäftliche Anforderungen um Priorität konkurrieren und ein gemeinsames Zielbild fehlt.
 situation: Viele Anforderungen konkurrieren miteinander; technische und geschäftliche Prioritäten sind nicht sauber verbunden.
 outcome: Ein klares Zielbild und eine belastbare Roadmap für die nächsten Entscheidungen.

@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { getCollection } from 'astro:content';
-import { routes, withBase } from '../config/site';
+import { contactHref, routes, withBase } from '../config/site';
+import { serviceClusters } from '../data/service-clusters';
 const assetBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order).map(({ data }) => data);
 const approvedCases = (await getCollection('cases', ({ data }) => data.publicationStatus === 'approved-internal')).sort((a, b) => a.data.order - b.data.order);
@@ -75,32 +76,30 @@ const featuredCase = approvedCases[0]?.data;
         <div class="section-label">01 / Expertise</div>
         <div>
           <p class="eyebrow">Leistungen für bestehende Shopware-Systeme</p>
-          <h2>Technik weiterentwickeln.<br />Entscheidungen <em>sauber vorbereiten.</em></h2>
-          <p class="lead compact">Shopware ist unser technischer Fokus. Wir verbinden Engineering, E-Commerce-Beratung und individuelle Entwicklung dort, wo gewachsene Systeme, Datenflüsse und Prozesse den nächsten Schritt komplex machen.</p>
-          <div class="service-grid">
-            <div class="service-list" role="tablist" aria-label="Leistungswege">
-              {services.map(({ title }, index) => (
-                <button id={`service-tab-${index}`} role="tab" data-service aria-controls={`service-panel-${index}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? '0' : '-1'}>
-                  <span>0{index + 1}</span>{title}<b>↗</b>
-                </button>
-              ))}
-            </div>
-            <aside>
-              {services.map(({ title, situation, outcome, scope, entry, href, linkLabel }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl><a class="catalog-link" href={withBase(href)}>{linkLabel} <span aria-hidden="true">→</span></a></section>)}
-              <figure class="system-visual">
-                <img
-                  src={`${assetBase}/assets/df-code-card-engineering-visual-v1.webp`}
-                  width="1536"
-                  height="1024"
-                  alt="Abstrakte Visualisierung von digitalem Engineering und modularen Systemen."
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption><span>Systemmodell</span><strong>Zusammenhänge sichtbar machen.</strong><small>Technik, Daten und Prozesse in einem gemeinsamen Bild betrachten.</small></figcaption>
-              </figure>
-            </aside>
+          <h2>Der passende Einstieg für<br />dein System und <em>dein Vorhaben.</em></h2>
+          <p class="lead compact">Nicht jede Situation beginnt an derselben Stelle. Manche Entscheidungen brauchen zuerst Klarheit, andere eine technische Umsetzung oder einen belastbaren Weg für den laufenden Betrieb. Deshalb sind unsere Leistungen in drei zusammenhängende Bereiche gegliedert.</p>
+          <div class="service-clusters">
+            {serviceClusters.map((cluster) => {
+              const entries = services.filter((service) => service.cluster === cluster.id);
+              return <section aria-labelledby={`service-cluster-${cluster.id}`}>
+                <header><span>0{cluster.order}</span><h3 id={`service-cluster-${cluster.id}`}>{cluster.title}</h3></header>
+                <ul>{entries.map(({ title, summary, href }) => <li><a href={withBase(href)}><strong>{title}</strong><small>{summary}</small><span aria-hidden="true">→</span></a></li>)}</ul>
+              </section>;
+            })}
           </div>
-          <div class="section-actions"><a class="section-cta" href={withBase(routes.services)}>Leistungen ansehen →</a><a class="section-cta section-cta-secondary" href="#kontakt">Erstgespräch vereinbaren ↗</a></div>
+          <figure class="system-visual service-system-visual">
+            <img
+              src={`${assetBase}/assets/df-code-card-engineering-visual-v1.webp`}
+              width="1536"
+              height="1024"
+              alt="Abstrakte Visualisierung von digitalem Engineering und modularen Systemen."
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption><span>Systemmodell</span><strong>Zusammenhänge sichtbar machen.</strong><small>Technik, Daten und Prozesse in einem gemeinsamen Bild betrachten.</small></figcaption>
+          </figure>
+          <div class="section-actions"><a class="section-cta" href={withBase(routes.services)}>Alle Leistungen ansehen →</a><a class="section-cta section-cta-secondary" href={contactHref('DigitalForces-Vorhaben')}>Passenden Einstieg besprechen ↗</a></div>
+          <small class="service-cluster-microcopy">Wir klären Ausgangslage, Ziel und den sinnvollen nächsten Schritt.</small>
         </div>
       </section>
 
