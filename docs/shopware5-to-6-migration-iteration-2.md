@@ -17,6 +17,14 @@
 
 **Implementierungsreife:** Das technische Grundgerüst kann nach Übernahme der Copy-Korrekturen lokal umgesetzt werden. Für einen privaten/noindex Preview-Build fehlen keine Architekturentscheidungen. Vor jedem Push/Deploy bleibt eine ausdrückliche Owner-Freigabe erforderlich.
 
+### Owner-Entscheidung vom 2026-08-07
+
+- **„Shopware-5→6 Migrations-Check“ ist freigegeben** als klar abgegrenzte Discovery-Phase: Ausgangslage, Risiken, Zielbild und nächster sinnvoller Schritt.
+- Die Bezeichnung erlaubt **keine** implizite Zusage zu Preis, Dauer, Downtime, Datenvollständigkeit oder einem anschließenden Umsetzungsumfang.
+- **CTA:** „Migrationsvorhaben besprechen“; zulässige Ergänzung: „Wir klären Ausgangslage, Risiken und den sinnvollen nächsten Schritt.“ Kontaktziel bleibt Mailto.
+- **Methodischer Ablauf ohne Proof-Claim:** Bestandsaufnahme → Zielbild → Neuaufbau/Datenübernahme → Tests → Cutover → Stabilisierung.
+- Kein Kunden-Case. Die QA bleibt nach Miras finalisierter Copy zwingend; Push/Preview/Release sind nicht freigegeben.
+
 ## 2. MIG-TECH-01 – Claims-Review-Matrix
 
 ### Statuslegende
@@ -78,7 +86,7 @@
 | FAQ Plugins/Schnittstellen | **freigabefähig mit Ergänzung** | Pro Extension/Integration sind Zielversion, Ersatz/Neubau, Datenpfad und End-to-End-Test zu klären. |
 | FAQ URLs/Inhalte | **freigabefähig mit Ergänzung** | URL-Inventar, Zielmapping, direkte Redirects, Canonicals, interne Links und Monitoring nennen; keine Rankingzusage. |
 | FAQ Dauer/Kosten | **freigabefähig** | Der projektabhängige Wortlaut ist korrekt. Keine Beispielspanne ergänzen. |
-| „Migrations-Check“/Roadmap/Go-live/Betrieb | **Owner-Gate** | Nur als konkrete Leistung/Deliverable benennen, wenn Scope und Kontaktprozess bestätigt sind. Bis dahin „Migrationsvorhaben besprechen“. |
+| „Shopware-5→6 Migrations-Check“ | **Freigabefähig mit engem Scope** | Ausschließlich als Discovery-Phase für Ausgangslage, Risiken, Zielbild und nächsten sinnvollen Schritt. Keine implizite Roadmap-, Umsetzungs-, Go-live- oder Betriebszusage; keine Zeit-/Preis-/Ergebnisangabe. CTA bleibt „Migrationsvorhaben besprechen“. |
 
 ### 2.5 Primärquellenregister
 
@@ -269,7 +277,7 @@ Die statische Route kann über `src/pages/leistungen/[...slug].astro` und `getSt
 
 1. Sven: Claims-/IA-Gate (**erledigt**).
 2. Mira: Route und Copy-Korrekturen übernehmen; Hub plus zwei Supporting Pages als reviewfähige Copy liefern.
-3. Stephen: Leistungsumfang/CTA/„Migrations-Check“ entscheiden; für einen neutralen Mailto-CTA nicht zwingend vor lokalem Scaffold nötig.
+3. Mira: finalisierte Copy auf den freigegebenen Discovery-Scope und CTA abgleichen.
 4. Sven: Contentmodell, Komponenten und drei Routen lokal implementieren.
 5. Sven + Mira: technische und redaktionelle QA; Claim-Quellen erneut prüfen.
 6. Owner: separate Freigabe für Push/noindex Preview.
@@ -279,8 +287,8 @@ Die statische Route kann über `src/pages/leistungen/[...slug].astro` und `getSt
 
 - **Kein Architekturblocker:** lokaler Scaffold und noindex Build können nach Copy-Übergabe beginnen.
 - **Copy-Abhängigkeit:** Supporting Pages benötigen Miras ausformulierte Texte auf Basis der Pflichtabschnitte und Claims-Matrix.
-- **Owner-Entscheidung:** Bietet DigitalForces konkret Analyse/Check, Konzeption, Umsetzung, Go-live-Begleitung und Betrieb an? Bis dahin keine Deliverable-Zusage.
-- **CTA-Entscheidung:** „Migrations-Check“ bleibt Arbeitsbegriff; Default ist „Migrationsvorhaben besprechen“ per Mailto.
+- **Owner-Entscheidung geschlossen:** Der Migrations-Check ist ausschließlich die klar abgegrenzte Discovery-Phase. Konzeption, Umsetzung, Go-live-Begleitung und Betrieb dürfen daraus nicht automatisch als beauftragte bzw. zugesagte Folgephasen abgeleitet werden.
+- **CTA-Entscheidung geschlossen:** „Migrationsvorhaben besprechen“ per Mailto; Ergänzung „Wir klären Ausgangslage, Risiken und den sinnvollen nächsten Schritt.“ Keine Dauer-/Gratis-Microcopy.
 - **Proof:** kein migrationsspezifischer Case; keine Kunden-/Referenzsektion in Welle 1.
 - **SEO-Entscheidung:** Keyword-/SERP-Validierung kann nach Welle 1 erfolgen; sie blockiert die fachlich saubere Hub-Architektur nicht.
 
@@ -347,7 +355,7 @@ Die statische Route kann über `src/pages/leistungen/[...slug].astro` und `getSt
 2. Die fünf Satzkorrekturen aus Abschnitt 2.4 übernehmen.
 3. „Migrationsprozess“ mit den Pflichtteilen aus QA 6.2 ausformulieren.
 4. „Daten, Plugins & Integrationen“ entlang Discovery D–H ausformulieren.
-5. CTA bis Owner-Entscheidung auf „Migrationsvorhaben besprechen“ begrenzen; keine Dauer-/Gratis-Microcopy.
+5. CTA verbindlich auf „Migrationsvorhaben besprechen“ setzen; freigegebene Ergänzung verwenden und keine Dauer-/Gratis-Microcopy ergänzen.
 
 ### Nächster technischer Schritt
 
