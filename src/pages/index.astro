@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
+const assetBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 const services = [
   { name: 'Shopware Engineering', problem: 'Dein Shopware-System ist geschäftskritisch, aber Änderungen, Integrationen oder Betrieb erzeugen unnötige Risiken.', result: 'Eine belastbare technische Grundlage, die sich nachvollziehbar betreiben und weiterentwickeln lässt.', scope: 'Integrationen, Erweiterungen, Performance, Stabilisierung, Betrieb und Weiterentwicklung.', entry: 'Technische Bestandsaufnahme mit priorisierten Handlungsfeldern.' },
   { name: 'E-Commerce Business Consulting', problem: 'Viele Anforderungen konkurrieren miteinander; technische und geschäftliche Prioritäten sind nicht sauber verbunden.', result: 'Ein klares Zielbild und eine belastbare Roadmap für die nächsten Entscheidungen.', scope: 'Ziele, Prozesse, Priorisierung, Lösungsschnitt und Entscheidungsgrundlagen.', entry: 'Fokussierter Workshop zu Ausgangslage, Zielen und Abhängigkeiten.' },
@@ -13,6 +14,16 @@ const services = [
     <Header />
     <main>
       <section class="hero">
+        <img
+          class="hero-media"
+          src={`${assetBase}/assets/df-hero-system-work-v1.webp`}
+          width="1672"
+          height="941"
+          alt="Generische, KI-generierte Darstellung technischer Arbeit an einem E-Commerce-System."
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
         <div class="hero-kicker"><span></span> Shopware Engineering · E-Commerce Consulting</div>
         <h1>Shopware,<br /><em>das belastbar</em><br />funktioniert.</h1>
         <div class="hero-bottom">
@@ -50,6 +61,16 @@ const services = [
         <div class="section-label">02 / Arbeitsweise</div>
         <div>
           <p class="eyebrow">Klarer Prozess</p><h2>Klare Entscheidungen.<br /><em>Saubere Umsetzung.</em></h2>
+          <figure class="approach-media">
+            <img
+              src={`${assetBase}/assets/df-working-method-v1.webp`}
+              width="1536"
+              height="1024"
+              alt="Generische, KI-generierte Darstellung gemeinsamer Arbeit an einem technischen Prozessplan."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <div class="steps">
             <article><span>01</span><h3>Verstehen</h3><p>Wir lesen System, Daten und Ziele, bevor wir Lösungen versprechen.</p></article>
             <article><span>02</span><h3>Entscheiden</h3><p>Wir machen Optionen, Risiken und Konsequenzen transparent.</p></article>
