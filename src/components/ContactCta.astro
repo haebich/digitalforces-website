@@ -6,6 +6,8 @@ interface Props {
   title?: string;
   text?: string;
   subject?: string;
+  microcopy?: string;
+  label?: string;
 }
 
 const {
@@ -13,12 +15,14 @@ const {
   title = 'Lass uns dein Vorhaben zuerst sauber einordnen.',
   text = 'In einem ersten Gespräch klären wir Ausgangslage, Ziel und den sinnvollsten nächsten Schritt.',
   subject,
+  microcopy = '30 Minuten · kostenfrei · unverbindlich',
+  label = 'Erstgespräch vereinbaren',
 } = Astro.props;
 ---
 <section class="route-contact" aria-labelledby="route-contact-title">
   <p class="eyebrow">{eyebrow}</p>
   <h2 id="route-contact-title">{title}</h2>
   <p>{text}</p>
-  <a href={contactHref(subject)}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
-  <small>30 Minuten · kostenfrei · unverbindlich</small>
+  <a href={contactHref(subject)}>{label} <span aria-hidden="true">↗</span></a>
+  {microcopy && <small>{microcopy}</small>}
 </section>

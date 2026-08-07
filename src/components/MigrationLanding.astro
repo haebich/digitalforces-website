@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import SiteFooter from './SiteFooter.astro';
+import ContactCta from './ContactCta.astro';
+import { migrationContact, migrationRoutes, type MigrationPage } from '../data/migration-pages';
+import { contactHref, routes, withBase } from '../config/site';
+
+interface Props {
+  page: MigrationPage;
+}
+
+const { page } = Astro.props;
+const internalHref = (href: string) => href.startsWith('#') ? href : withBase(href);
+const breadcrumbs = [
+  { label: 'Startseite', href: routes.home },
+  { label: 'Leistungen', href: routes.services },
+  ...(page.pathname === migrationRoutes.hub ? [] : [{ label: 'Shopware-5→6 Migration', href: migrationRoutes.hub }]),
+];
+---
+<Base pathname={page.pathname} title={page.title} description={page.description}>
+  <div class="route-shell migration-shell">
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <header class="route-hero migration-hero">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            {breadcrumbs.map((item) => <li><a href={withBase(item.href)}>{item.label}</a></li>)}
+            <li aria-current="page">{page.heading}</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">{page.kicker}</p>
+        <h1>{page.heading}</h1>
+        <p class="migration-hero-intro">{page.intro}</p>
+        {page.technicalNote && <p class="migration-technical-note">{page.technicalNote}</p>}
+        <div class="migration-hero-actions">
+          <a class="migration-primary-cta" href={contactHref(migrationContact.subject)}>{migrationContact.label} <span aria-hidden="true">↗</span></a>
+          {page.secondaryLink && <a class="migration-secondary-cta" href={page.secondaryLink.href}>{page.secondaryLink.label} <span aria-hidden="true">↓</span></a>}
+        </div>
+        <small class="migration-cta-microcopy">{migrationContact.microcopy}</small>
+      </header>
+
+      <div class="migration-content">
+        {page.sections.map((section, sectionIndex) => (
+          <section id={section.id} class="migration-section" aria-labelledby={`migration-section-${sectionIndex}`}>
+            <p class="section-label">{String(sectionIndex + 1).padStart(2, '0')}</p>
+            <div>
+              <h2 id={`migration-section-${sectionIndex}`}>{section.heading}</h2>
+              {section.blocks.map((block) => (
+                block.type === 'text' ? (
+                  <div class="migration-copy">{block.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+                ) : block.type === 'list' ? (
+                  <div class="migration-list-block">
+                    {block.label && <h3>{block.label}</h3>}
+                    <ul>{block.items.map((item) => <li>{item}</li>)}</ul>
+                  </div>
+                ) : block.type === 'steps' ? (
+                  <ol class="migration-steps">
+                    {block.items.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}
+                  </ol>
+                ) : (
+                  <div class="migration-table-wrap">
+                    <table>
+                      <caption>{block.caption}</caption>
+                      <thead><tr>{block.headers.map((header) => <th scope="col">{header}</th>)}</tr></thead>
+                      <tbody>{block.rows.map((row) => <tr><th scope="row">{row[0]}</th><td>{row[1]}</td></tr>)}</tbody>
+                    </table>
+                  </div>
+                )
+              ))}
+              {section.cta && <div class="migration-inline-cta"><a href={contactHref(migrationContact.subject)}>{migrationContact.label} <span aria-hidden="true">↗</span></a><small>{migrationContact.microcopy}</small></div>}
+            </div>
+          </section>
+        ))}
+
+        <section class="migration-section migration-faq" aria-labelledby="migration-faq-title">
+          <p class="section-label">FAQ</p>
+          <div>
+            <h2 id="migration-faq-title">Was vor dem nächsten Schritt klar sein sollte.</h2>
+            {page.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+          </div>
+        </section>
+
+        <nav class="migration-related" aria-label="Weiterführende Inhalte">
+          <p class="eyebrow">Weiterführende Inhalte</p>
+          <ul>{page.relatedLinks.map((link) => <li><a href={internalHref(link.href)}>{link.label} <span aria-hidden="true">→</span></a></li>)}</ul>
+        </nav>
+      </div>
+
+      <ContactCta
+        eyebrow="Shopware-5→6 Migrations-Check"
+        title="Migrationsvorhaben zuerst sauber einordnen."
+        text="Wir klären Ausgangslage, Risiken, Zielbild und den sinnvollen nächsten Schritt."
+        subject={migrationContact.subject}
+        microcopy={migrationContact.microcopy}
+        label={migrationContact.label}
+      />
+    </main>
+    <SiteFooter />
+  </div>
+</Base>

@@ -5,7 +5,12 @@ const cdpUrl = process.env.QA_CDP_URL ?? 'ws://browser:3000';
 const baseUrl = new URL(process.env.QA_BASE_URL ?? 'http://127.0.0.1:4321/');
 const outputDir = resolve(process.env.QA_OUTPUT_DIR ?? '/tmp/digitalforces-route-qa');
 const expectReleased = process.env.QA_EXPECT_RELEASED === 'true';
-const routes = ['/', '/leistungen/', '/referenzen/', '/impressum/', '/datenschutz/'];
+const migrationRoutes = [
+  '/leistungen/shopware-5-auf-6-migration/',
+  '/leistungen/shopware-5-auf-6-migration/migrationsprozess/',
+  '/leistungen/shopware-5-auf-6-migration/daten-plugins-integrationen/',
+];
+const routes = ['/', '/leistungen/', ...migrationRoutes, '/referenzen/', '/impressum/', '/datenschutz/'];
 const widths = [1440, 1024, 768, 390];
 const expectedCanonicals = new Map(routes.map((route) => [route, new URL(route, 'https://www.digital-forces.de').toString()]));
 
@@ -144,13 +149,27 @@ for (const width of widths) {
           && image.currentSrc.endsWith('/assets/df-code-card-engineering-visual-v1.webp')
           && image.alt === 'Abstrakte Visualisierung von digitalem Engineering und modularen Systemen.';
       })(),
+      migrationUiReady: ${!migrationRoutes.includes(route)} || (() => {
+        const currentNav = document.querySelector('.site-header nav a[aria-current="page"]');
+        const mailto = [...document.querySelectorAll('a[href^="mailto:"]')].find((link) => link.textContent.includes('Migrationsvorhaben besprechen'));
+        const relatedLinks = document.querySelectorAll('.migration-related a');
+        const preparationTarget = ${route === migrationRoutes[0]} ? document.getElementById('vorbereitung') : true;
+        const preparationLink = ${route === migrationRoutes[0]} ? document.querySelector('.migration-secondary-cta')?.getAttribute('href') === '#vorbereitung' : true;
+        return currentNav?.textContent.trim() === 'Leistungen'
+          && Boolean(document.querySelector('.breadcrumbs'))
+          && Boolean(document.querySelector('.migration-faq'))
+          && Boolean(mailto?.getAttribute('href')?.includes('subject=Shopware-5-zu-6-Migrationsvorhaben'))
+          && relatedLinks.length >= 2
+          && Boolean(preparationTarget)
+          && preparationLink;
+      })(),
     }))()`);
 
     const expectedCanonical = expectReleased ? expectedCanonicals.get(route) : null;
-    const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && state.homeUiReady && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
+    const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && state.homeUiReady && state.migrationUiReady && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
     results.push({ route, width, passed, ...state, requestFailures, badResponses, externalRequests: [...new Set(externalRequests)] });
 
-    if ((route === '/' || route === '/leistungen/' || route === '/referenzen/') && (width === 1440 || width === 390 || (route === '/' && width === 1024))) {
+    if ((route === '/' || route === '/leistungen/' || route === '/referenzen/' || route === migrationRoutes[0]) && (width === 1440 || width === 390 || (route === '/' && width === 1024))) {
       await evaluate(page.sessionId, "document.querySelectorAll('[data-reveal]').forEach((element) => element.classList.add('is-visible'));");
       const { data } = await call('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, fromSurface: true }, page.sessionId);
       const routeName = route === '/' ? 'home' : route.replaceAll('/', '');

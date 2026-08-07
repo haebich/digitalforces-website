@@ -1,0 +1,15 @@
+---
+import MigrationLanding from '../../components/MigrationLanding.astro';
+import { migrationPages, type MigrationPage } from '../../data/migration-pages';
+
+export function getStaticPaths() {
+  return migrationPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+interface Props {
+  page: MigrationPage;
+}
+
+const { page } = Astro.props;
+---
+<MigrationLanding page={page} />
