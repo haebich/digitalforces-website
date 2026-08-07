@@ -1,0 +1,37 @@
+.service-detail-hero{min-height:740px;padding-top:150px}
+.service-detail-hero:after{background:radial-gradient(circle at 80% 30%,rgba(136,245,200,.18),transparent 28%),linear-gradient(130deg,transparent 42%,rgba(200,255,53,.055)),repeating-linear-gradient(90deg,transparent 0,transparent calc(12.5% - 1px),rgba(255,255,255,.03) 12.5%)}
+.service-detail-hero>.eyebrow{margin:58px 0 24px}
+.service-detail-hero h1{max-width:1160px;font-size:clamp(54px,7.5vw,108px);line-height:.95}
+.service-detail-intro{max-width:800px!important;margin:36px 0 0!important;color:#c0cbc7!important;font-size:19px!important;line-height:1.62!important}
+.service-detail-primary{align-self:flex-start;display:inline-flex;gap:34px;margin-top:34px;padding:16px 18px;background:var(--lime);color:var(--ink);text-decoration:none;font-size:14px}
+.service-detail-content{padding:0 4vw 120px}
+.service-detail-section{display:grid;grid-template-columns:16% minmax(0,1fr);gap:4vw;padding:100px 0;border-top:1px solid var(--line);scroll-margin-top:24px}
+.service-detail-section:first-child{border-top:0}
+.service-detail-section>.section-label{color:#41504b}
+.service-detail-section>div{max-width:1020px}
+.service-detail-section h2{max-width:1000px;margin:18px 0 48px;font-size:clamp(44px,5.8vw,82px);line-height:.98}
+.service-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0;padding:1px;background:var(--line);list-style:none}
+.service-detail-grid li{min-height:220px;padding:30px;background:var(--paper)}
+.service-detail-grid h3,.service-detail-list h3,.service-detail-steps h3{margin:0 0 12px;font-size:22px;line-height:1.2;letter-spacing:-.025em}
+.service-detail-grid p,.service-detail-list p,.service-detail-steps p{margin:0;color:#43524d;line-height:1.65}
+.service-detail-list,.service-detail-steps{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.service-detail-list li,.service-detail-steps li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:20px;padding:28px 0;border-bottom:1px solid var(--line)}
+.service-detail-list li>span,.service-detail-steps li>span{color:#41504b;font:12px ui-monospace,SFMono-Regular,Consolas,monospace}
+.service-detail-entry>div>p:not(.eyebrow){max-width:780px;color:#43524d;font-size:18px;line-height:1.7}
+.service-detail-entry>div>a{display:inline-flex;gap:30px;margin-top:30px;padding:16px 18px;background:var(--ink);color:var(--lime);text-decoration:none}
+.service-detail-faq details{border-top:1px solid var(--line)}
+.service-detail-faq details:last-child{border-bottom:1px solid var(--line)}
+.service-detail-faq summary{padding:24px 42px 24px 0;cursor:pointer;font-size:19px;font-weight:600;line-height:1.4}
+.service-detail-faq details p{max-width:800px;margin:0;padding:0 0 24px;color:#43524d;line-height:1.7}
+.service-detail-related{margin-top:10px;padding:54px 16% 54px 20%;background:#deddd5}
+.service-detail-related .eyebrow{margin:0 0 24px}
+.service-detail-related ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.service-detail-related a{min-height:110px;padding:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;background:var(--paper);color:var(--ink);text-decoration:none;font-size:17px}
+.service-detail-related a:hover{text-decoration:underline;text-underline-offset:5px}
+@media(max-width:800px){
+  .service-detail-hero{min-height:700px;padding:135px 5vw 65px}.service-detail-hero>.eyebrow{margin-top:22px}.service-detail-hero h1{font-size:clamp(46px,13vw,68px)}.service-detail-intro{font-size:16px!important;margin-top:28px!important}.service-detail-primary{width:100%;justify-content:space-between}
+  .service-detail-content{padding:0 5vw 80px}.service-detail-section{grid-template-columns:1fr;padding:72px 0}.service-detail-section>.section-label{margin-bottom:28px}.service-detail-section h2{font-size:clamp(40px,11vw,58px);margin-bottom:36px}
+  .service-detail-grid{grid-template-columns:1fr}.service-detail-grid li{min-height:0;padding:24px}.service-detail-grid h3,.service-detail-list h3,.service-detail-steps h3{font-size:18px}.service-detail-grid p,.service-detail-list p,.service-detail-steps p{font-size:15px}
+  .service-detail-list li,.service-detail-steps li{grid-template-columns:48px minmax(0,1fr)}
+  .service-detail-related{margin:0 -5vw;padding:48px 5vw}.service-detail-related ul{grid-template-columns:1fr}.service-detail-related a{min-height:86px}
+}

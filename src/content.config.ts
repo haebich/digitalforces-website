@@ -14,6 +14,39 @@ const services = defineCollection({
     scope: z.array(z.string()).min(1),
     scopeText: z.string(),
     entry: z.string(),
+    detail: z.object({
+      slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+      seoTitle: z.string(),
+      description: z.string(),
+      kicker: z.string(),
+      heading: z.string(),
+      intro: z.string(),
+      situations: z.array(z.object({
+        title: z.string(),
+        text: z.string(),
+      })).min(1),
+      capabilities: z.array(z.object({
+        title: z.string(),
+        text: z.string(),
+      })).min(1),
+      approach: z.array(z.object({
+        title: z.string(),
+        text: z.string(),
+      })).min(1),
+      entryHeading: z.string(),
+      entryText: z.string(),
+      faq: z.array(z.object({
+        question: z.string(),
+        answer: z.string(),
+      })).min(1),
+      relatedLinks: z.array(z.object({
+        label: z.string(),
+        href: z.string(),
+      })).min(1),
+      contactSubject: z.string(),
+      contactTitle: z.string(),
+      contactText: z.string(),
+    }).optional(),
   }),
 });
 

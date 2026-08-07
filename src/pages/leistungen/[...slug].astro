@@ -1,15 +1,30 @@
 ---
 import MigrationLanding from '../../components/MigrationLanding.astro';
 import { migrationPages, type MigrationPage } from '../../data/migration-pages';
+import ServiceLanding from '../../components/ServiceLanding.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-export function getStaticPaths() {
-  return migrationPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+type ServiceData = CollectionEntry<'services'>['data'];
+type ServiceDetailData = ServiceData & { detail: NonNullable<ServiceData['detail']> };
+
+export async function getStaticPaths() {
+  const services = await getCollection('services', ({ data }) => Boolean(data.detail));
+  return [
+    ...migrationPages.map((page) => ({
+      params: { slug: page.slug },
+      props: { kind: 'migration' as const, page },
+    })),
+    ...services.map(({ data }) => ({
+      params: { slug: data.detail!.slug },
+      props: { kind: 'service' as const, service: data as ServiceDetailData },
+    })),
+  ];
 }
 
-interface Props {
-  page: MigrationPage;
-}
+type Props =
+  | { kind: 'migration'; page: MigrationPage }
+  | { kind: 'service'; service: ServiceDetailData };
 
-const { page } = Astro.props;
+const props = Astro.props;
 ---
-<MigrationLanding page={page} />
+{props.kind === 'migration' ? <MigrationLanding page={props.page} /> : <ServiceLanding service={props.service} />}

@@ -43,6 +43,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
                 <div><dt>Leistungsrahmen</dt><dd>{data.scopeText}</dd></div>
                 <div><dt>Sinnvoller Einstieg</dt><dd>{data.entry}</dd></div>
               </dl>
+              {data.detail && <a class="catalog-link" href={withBase(`/leistungen/${data.detail.slug}/`)}>Leistung im Detail <span aria-hidden="true">→</span></a>}
               {index === 0 && <a class="catalog-link" href={withBase(migrationRoutes.hub)}>Shopware-5→6 Migration einordnen <span aria-hidden="true">→</span></a>}
             </div>
           </article>

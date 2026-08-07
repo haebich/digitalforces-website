@@ -1,0 +1,106 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import SiteFooter from './SiteFooter.astro';
+import ContactCta from './ContactCta.astro';
+import { routes, withBase } from '../config/site';
+
+type ServiceData = CollectionEntry<'services'>['data'];
+type ServiceDetailData = ServiceData & { detail: NonNullable<ServiceData['detail']> };
+
+interface Props {
+  service: ServiceDetailData;
+}
+
+const { service } = Astro.props;
+const { detail } = service;
+const pathname = `/leistungen/${detail.slug}/`;
+const internalHref = (href: string) => href.startsWith('#') ? href : withBase(href);
+---
+<Base pathname={pathname} title={detail.seoTitle} description={detail.description}>
+  <div class="route-shell service-detail-shell">
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <header class="route-hero service-detail-hero">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href={withBase(routes.home)}>Startseite</a></li>
+            <li><a href={withBase(routes.services)}>Leistungen</a></li>
+            <li aria-current="page">{service.title}</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">{detail.kicker}</p>
+        <h1>{detail.heading}</h1>
+        <p class="service-detail-intro">{detail.intro}</p>
+        <a class="service-detail-primary" href={`mailto:info@digital-forces.de?subject=${encodeURIComponent(detail.contactSubject)}`}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <div class="service-detail-content">
+        <section class="service-detail-section" aria-labelledby="service-situations-title">
+          <p class="section-label">01 / Ausgangslage</p>
+          <div>
+            <p class="eyebrow">Wann diese Leistung sinnvoll ist</p>
+            <h2 id="service-situations-title">Erst die Ausgangslage verstehen.</h2>
+            <ul class="service-detail-grid">
+              {detail.situations.map((item) => <li><h3>{item.title}</h3><p>{item.text}</p></li>)}
+            </ul>
+          </div>
+        </section>
+
+        <section class="service-detail-section" aria-labelledby="service-capabilities-title">
+          <p class="section-label">02 / Leistungsrahmen</p>
+          <div>
+            <p class="eyebrow">Was wir konkret einordnen und umsetzen</p>
+            <h2 id="service-capabilities-title">Ein klarer Leistungsrahmen.</h2>
+            <ul class="service-detail-list">
+              {detail.capabilities.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}
+            </ul>
+          </div>
+        </section>
+
+        <section class="service-detail-section" aria-labelledby="service-approach-title">
+          <p class="section-label">03 / Vorgehen</p>
+          <div>
+            <p class="eyebrow">Prüfbar statt beliebig</p>
+            <h2 id="service-approach-title">Vom Kontext zum nächsten Schritt.</h2>
+            <ol class="service-detail-steps">
+              {detail.approach.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}
+            </ol>
+          </div>
+        </section>
+
+        <section class="service-detail-section service-detail-entry" aria-labelledby="service-entry-title">
+          <p class="section-label">04 / Einstieg</p>
+          <div>
+            <p class="eyebrow">Der sinnvolle Einstieg</p>
+            <h2 id="service-entry-title">{detail.entryHeading}</h2>
+            <p>{detail.entryText}</p>
+            <a href={`mailto:info@digital-forces.de?subject=${encodeURIComponent(detail.contactSubject)}`}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <section class="service-detail-section service-detail-faq" aria-labelledby="service-faq-title">
+          <p class="section-label">FAQ</p>
+          <div>
+            <p class="eyebrow">Häufige Fragen</p>
+            <h2 id="service-faq-title">Was vor dem Start klar sein sollte.</h2>
+            {detail.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+          </div>
+        </section>
+
+        <nav class="service-detail-related" aria-label="Weiterführende Leistungen">
+          <p class="eyebrow">Weiterführende Leistungen</p>
+          <ul>{detail.relatedLinks.map((link) => <li><a href={internalHref(link.href)}>{link.label} <span aria-hidden="true">→</span></a></li>)}</ul>
+        </nav>
+      </div>
+
+      <ContactCta
+        title={detail.contactTitle}
+        text={detail.contactText}
+        subject={detail.contactSubject}
+      />
+    </main>
+    <SiteFooter />
+  </div>
+</Base>
