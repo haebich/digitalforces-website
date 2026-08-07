@@ -1,7 +1,7 @@
 # Shopware-5→6-Migrationskampagne – Copy-/Implementierungs-QA v1
 
 **Stand:** 2026-08-07  
-**Status:** bedingt implementierungsbereit; vier redaktionelle/Import-Restpunkte offen  
+**Status:** technisch implementierungsbereit; P0-Abschluss-Recheck bestanden
 **Task:** `shopware5-to-6-migration-landingpages-2026-08-07`  
 **Scope:** technische Satz-, Claim-, IA- und Implementierungsprüfung; keine Seitenimplementierung, kein Push, kein Deployment.
 
@@ -15,16 +15,16 @@
 
 ## Gesamturteil
 
-Die IA, Metadaten, fachliche Trennung und technischen Qualifier sind grundsätzlich implementierbar. Es wurden keine Kunden-/Referenz-, Zeit-, Preis-, Gratis-, Downtime-, Datenvollständigkeits-, SEO-/Ranking- oder Performancezusagen gefunden. Die Copy ist nach vier kleinen P0-Korrekturen implementierungsreif.
+Die IA, Metadaten, fachliche Trennung und technischen Qualifier sind implementierbar. Es wurden keine Kunden-/Referenz-, Zeit-, Preis-, Gratis-, Downtime-, Datenvollständigkeits-, SEO-/Ranking- oder Performancezusagen gefunden. Alle vier P0-Korrekturen sind im Abschluss-Recheck bestätigt.
 
-## P0 – vor Content-Import korrigieren
+## P0 – abgeschlossen
 
 | ID | Fundstelle | Befund | Erforderliche Korrektur | Abnahme |
 | --- | --- | --- | --- | --- |
-| COPY-QA-01 | Hub, Prozess Schritt 3 | Der Owner-freigegebene methodische Schritt „Neuaufbau/Datenübernahme“ wird im Hub nur als Zielsystem-/Funktionsaufbau dargestellt. | „Zielsystem aufbauen und Daten übertragen“; Body muss Aufbau plus Übertragung der vereinbarten Datenbereiche nennen. Schritt 4 bleibt fachlicher/technischer Test. | Datenübernahme im sichtbaren Ablauf vorhanden, ohne Vollständigkeitszusage. |
-| COPY-QA-02 | Hub, Migrations-Check | Die Discovery-Beschreibung nennt Ausgangslage, Risiken und nächsten Schritt, aber nicht ausdrücklich das freigegebene Zielbild. | „In der Discovery-Phase klären wir Ausgangslage, Risiken, Zielbild und den sinnvollen nächsten Schritt.“ | alle vier Owner-bestätigten Elemente in einem Sinnabschnitt. |
-| COPY-QA-03 | Hub H2; Daten-FAQ | Ansprache wechselt vom siteweiten „Du“ zu „euer“ bzw. „unsere“. | „dein Shop“; „deine ERP-/PIM-Anbindung“ oder neutrale Form. | keine Leseransprache im Ihr-/Wir-Frageformat außerhalb bewusst wörtlicher FAQ-Perspektive. |
-| COPY-QA-04 | alle drei Copy-Dokumente | Status/Gates/Technikgrundlage und redaktionelle Hinweise wie „Keine … Verlinkung auf Watzka“ sind keine öffentliche Copy. Ein unselektierter Markdown-Import würde interne Governance sichtbar machen. | Redaktionsmetadaten in Frontmatter/Übergabehinweis isolieren; nur explizit markierte Seitenabschnitte in die Content Collection übernehmen. | Build-Inhalt enthält keine internen Status-, Gate-, Quellenpfad- oder Ausschlusshinweise. |
+| COPY-QA-01 | Hub, Prozess Schritt 3 | **bestanden** | „Zielsystem aufbauen und Daten übertragen“ nennt Aufbau und vereinbarte Datenbereiche; Tests bleiben ein eigener Schritt. |
+| COPY-QA-02 | Hub, Migrations-Check | **bestanden** | Ausgangslage, Risiken, Zielbild und sinnvoller nächster Schritt stehen gemeinsam im Discovery-Abschnitt. |
+| COPY-QA-03 | Hub H2; Daten-FAQ | **bestanden** | „dein Shop“ und neutrale ERP-/PIM-Frage; kein unbeabsichtigter Wechsel zur Ihr-/Wir-Ansprache. |
+| COPY-QA-04 | alle drei Copy-Dokumente | **bestanden** | Interne Kommentare, Status-/Gate-/Quellenpfad- und Ausschlusshinweise wurden entfernt; Scan auf interne Marker und gesperrte Namen ohne Treffer. |
 
 ## P1 – redaktionelle Qualität, nicht blockierend
 
@@ -57,6 +57,8 @@ Die IA, Metadaten, fachliche Trennung und technischen Qualifier sind grundsätzl
 - Hub und Supporting Pages besitzen eigenständige H1, Title, Description und Suchintention.
 - Interne Links bilden Hub ↔ Supporting Pages sowie Rückweg zu Shopware Engineering ab.
 - CTA und Microcopy entsprechen dem Owner-Gate; Mailto-Betreff muss bei Implementierung kampagnenspezifisch gesetzt werden.
+- Das YAML-Frontmatter aller drei Dateien ist syntaktisch valide; Routen sind eindeutig, CTA-Felder und Related Links sind vollständig.
+- Der Markdown-Body ist ein strukturiertes redaktionelles Übergabeformat (`## Hero`, `**H1**` usw.), kein direkt semantisch auszugebendes Seiten-HTML. Bei der Implementierung werden die Felder/Abschnitte in die typisierte Collection und Komponenten gemappt; ein generisches `render()` des gesamten Bodys würde die H1-/Komponentensemantik nicht erfüllen.
 - FAQ kann ohne Client-JavaScript über native `details/summary` umgesetzt werden.
 - Vergleichstabellen benötigen bei 390 px eine gestapelte Darstellung oder semantische Definition Lists.
 - Preview-Gates aus `Base.astro` bleiben: `noindex, nofollow, noarchive`, keine Production-Canonical/`og:url`, Robots `Disallow: /`.
@@ -65,12 +67,14 @@ Die IA, Metadaten, fachliche Trennung und technischen Qualifier sind grundsätzl
 
 ## Automatisierte Vorprüfung
 
-- alle drei Dateien vollständig gelesen;
+- alle drei korrigierten Dateien vollständig gelesen;
+- YAML-Frontmatter mit Parser validiert; Pflichtfelder, eindeutige Routen, Mailto-CTA und interne Zielrouten geprüft;
 - Routen und Querverweise gegen die Ziel-IA geprüft;
 - Suche nach Kunden-/Referenznamen, Gratis-/Dauer-/Preis-, Garantie-, Vollständigkeits-, Downtime-, Ranking- und Performanceformulierungen durchgeführt;
+- Suche nach internen Kommentaren, Status-/Gate-Markern und ausgeschlossenen Namen ohne Treffer;
 - Meta-Längen ermittelt: Hub Title 50 / Description 124; Prozess 60 / 130; Daten-Seite 70 / 139 Zeichen;
 - referenzierte Claim-Freigabedatei ist vorhanden.
 
 ## Freigabestatus
 
-**Bedingt implementierungsbereit.** Nach Bestätigung von COPY-QA-01 bis -04 ist kein fachlicher oder architektonischer Restblocker für die lokale Implementierung bekannt. Push, Preview-Deployment und jede Veröffentlichung bleiben separate Owner-Freigaben.
+**Technisch implementierungsbereit.** COPY-QA-01 bis -04 sind geschlossen; es ist kein fachlicher oder architektonischer Restblocker für die lokale Implementierung bekannt. Die P1-Sprach-/Title-Optimierungen können im redaktionellen Feinschliff erfolgen. Push, Preview-Deployment und jede Veröffentlichung bleiben separate Owner-Freigaben.
