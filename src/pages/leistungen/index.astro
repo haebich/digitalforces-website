@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import ContactCta from '../../components/ContactCta.astro';
-import { migrationRoutes } from '../../data/migration-pages';
 import { withBase } from '../../config/site';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -27,7 +26,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
         <p class="section-label">01 / Leistungswege</p>
         <div>
           <p class="eyebrow">Passender Lösungsschnitt</p>
-          <h2 id="services-intro">Vier Wege.<br /><em>Ein klares Zielbild.</em></h2>
+          <h2 id="services-intro">Sechs Wege.<br /><em>Ein klares Zielbild.</em></h2>
           <p class="lead">Wir beginnen nicht mit einem beliebigen Leistungspaket, sondern mit der Frage, was dein System und dein Geschäft als Nächstes wirklich brauchen.</p>
         </div>
       </section>
@@ -43,8 +42,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
                 <div><dt>Leistungsrahmen</dt><dd>{data.scopeText}</dd></div>
                 <div><dt>Sinnvoller Einstieg</dt><dd>{data.entry}</dd></div>
               </dl>
-              {data.detail && <a class="catalog-link" href={withBase(`/leistungen/${data.detail.slug}/`)}>Leistung im Detail <span aria-hidden="true">→</span></a>}
-              {index === 0 && <a class="catalog-link" href={withBase(migrationRoutes.hub)}>Shopware-5→6 Migration einordnen <span aria-hidden="true">→</span></a>}
+              <a class="catalog-link" href={withBase(data.href)}>{data.linkLabel} <span aria-hidden="true">→</span></a>
             </div>
           </article>
         ))}

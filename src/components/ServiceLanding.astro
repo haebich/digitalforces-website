@@ -33,18 +33,17 @@ const internalHref = (href: string) => href.startsWith('#') ? href : withBase(hr
         <p class="eyebrow">{detail.kicker}</p>
         <h1>{detail.heading}</h1>
         <p class="service-detail-intro">{detail.intro}</p>
-        <a class="service-detail-primary" href={`mailto:info@digital-forces.de?subject=${encodeURIComponent(detail.contactSubject)}`}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
+        <a class="service-detail-primary" href={`mailto:info@digital-forces.de?subject=${encodeURIComponent(detail.contactSubject)}`}>{detail.ctaLabel} <span aria-hidden="true">↗</span></a>
+        <small class="service-detail-microcopy">{detail.ctaMicrocopy}</small>
       </header>
 
       <div class="service-detail-content">
-        <section class="service-detail-section" aria-labelledby="service-situations-title">
+        <section class="service-detail-section" aria-labelledby="service-context-title">
           <p class="section-label">01 / Ausgangslage</p>
           <div>
             <p class="eyebrow">Wann diese Leistung sinnvoll ist</p>
-            <h2 id="service-situations-title">Erst die Ausgangslage verstehen.</h2>
-            <ul class="service-detail-grid">
-              {detail.situations.map((item) => <li><h3>{item.title}</h3><p>{item.text}</p></li>)}
-            </ul>
+            <h2 id="service-context-title">{detail.contextHeading}</h2>
+            <p class="service-detail-context">{detail.contextText}</p>
           </div>
         </section>
 
@@ -52,33 +51,33 @@ const internalHref = (href: string) => href.startsWith('#') ? href : withBase(hr
           <p class="section-label">02 / Leistungsrahmen</p>
           <div>
             <p class="eyebrow">Was wir konkret einordnen und umsetzen</p>
-            <h2 id="service-capabilities-title">Ein klarer Leistungsrahmen.</h2>
+            <h2 id="service-capabilities-title">{detail.capabilitiesHeading}</h2>
             <ul class="service-detail-list">
-              {detail.capabilities.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}
+              {detail.capabilities.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3>{item.text && <p>{item.text}</p>}</div></li>)}
             </ul>
           </div>
         </section>
 
-        <section class="service-detail-section" aria-labelledby="service-approach-title">
+        {detail.approach && <section class="service-detail-section" aria-labelledby="service-approach-title">
           <p class="section-label">03 / Vorgehen</p>
           <div>
             <p class="eyebrow">Prüfbar statt beliebig</p>
-            <h2 id="service-approach-title">Vom Kontext zum nächsten Schritt.</h2>
+            <h2 id="service-approach-title">{detail.approachHeading}</h2>
             <ol class="service-detail-steps">
-              {detail.approach.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></li>)}
+              {detail.approach.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3>{item.text && <p>{item.text}</p>}</div></li>)}
             </ol>
           </div>
-        </section>
+        </section>}
 
-        <section class="service-detail-section service-detail-entry" aria-labelledby="service-entry-title">
-          <p class="section-label">04 / Einstieg</p>
+        {detail.entry && <section class="service-detail-section service-detail-entry" aria-labelledby="service-entry-title">
+          <p class="section-label">{detail.approach ? '04' : '03'} / Einstieg</p>
           <div>
             <p class="eyebrow">Der sinnvolle Einstieg</p>
-            <h2 id="service-entry-title">{detail.entryHeading}</h2>
-            <p>{detail.entryText}</p>
-            <a href={`mailto:info@digital-forces.de?subject=${encodeURIComponent(detail.contactSubject)}`}>Erstgespräch vereinbaren <span aria-hidden="true">↗</span></a>
+            <h2 id="service-entry-title">{detail.entry.heading}</h2>
+            <p>{detail.entry.text}</p>
+            <a href={`mailto:info@digital-forces.de?subject=${encodeURIComponent(detail.contactSubject)}`}>{detail.ctaLabel} <span aria-hidden="true">↗</span></a>
           </div>
-        </section>
+        </section>}
 
         <section class="service-detail-section service-detail-faq" aria-labelledby="service-faq-title">
           <p class="section-label">FAQ</p>
@@ -99,6 +98,8 @@ const internalHref = (href: string) => href.startsWith('#') ? href : withBase(hr
         title={detail.contactTitle}
         text={detail.contactText}
         subject={detail.contactSubject}
+        label={detail.ctaLabel}
+        microcopy={detail.ctaMicrocopy}
       />
     </main>
     <SiteFooter />

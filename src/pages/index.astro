@@ -74,9 +74,9 @@ const featuredCase = approvedCases[0]?.data;
       <section id="expertise" class="section expertise" data-reveal>
         <div class="section-label">01 / Expertise</div>
         <div>
-          <p class="eyebrow">Was wir lösen</p>
-          <h2>Technik, die dem<br />Geschäft <em>dient.</em></h2>
-          <p class="lead compact">Shopware ist unser technischer Fokus. Beratung, KI und individuelle Entwicklung ergänzen ihn dort, wo dein Geschäftsmodell und deine Abläufe es erfordern.</p>
+          <p class="eyebrow">Leistungen für bestehende Shopware-Systeme</p>
+          <h2>Technik weiterentwickeln.<br />Entscheidungen <em>sauber vorbereiten.</em></h2>
+          <p class="lead compact">Shopware ist unser technischer Fokus. Wir verbinden Engineering, E-Commerce-Beratung und individuelle Entwicklung dort, wo gewachsene Systeme, Datenflüsse und Prozesse den nächsten Schritt komplex machen.</p>
           <div class="service-grid">
             <div class="service-list" role="tablist" aria-label="Leistungswege">
               {services.map(({ title }, index) => (
@@ -86,7 +86,7 @@ const featuredCase = approvedCases[0]?.data;
               ))}
             </div>
             <aside>
-              {services.map(({ title, situation, outcome, scope, entry }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl></section>)}
+              {services.map(({ title, situation, outcome, scope, entry, href, linkLabel }, index) => <section id={`service-panel-${index}`} role="tabpanel" aria-labelledby={`service-tab-${index}`} data-service-panel><h3>{title}</h3><dl class="service-details"><div><dt>Ausgangslage</dt><dd>{situation}</dd></div><div><dt>Ergebnis</dt><dd>{outcome}</dd></div><div><dt>Leistungsrahmen</dt><dd>{scope.join(' · ')}</dd></div><div><dt>Sinnvoller Einstieg</dt><dd>{entry}</dd></div></dl><a class="catalog-link" href={withBase(href)}>{linkLabel} <span aria-hidden="true">→</span></a></section>)}
               <figure class="system-visual">
                 <img
                   src={`${assetBase}/assets/df-code-card-engineering-visual-v1.webp`}
