@@ -10,6 +10,7 @@ import '../styles/signal-section.css';
 import '../styles/nojs.css';
 const { title, description } = Astro.props;
 const isPreview = import.meta.env.GITHUB_PAGES_PREVIEW === 'true';
+const assetBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <!doctype html>
 <html lang="de">
@@ -19,6 +20,11 @@ const isPreview = import.meta.env.GITHUB_PAGES_PREVIEW === 'true';
     <meta name="description" content={description} />
     {isPreview && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <meta name="theme-color" content="#07110f" />
+    <link rel="icon" href={`${assetBase}/favicon.ico`} sizes="any" />
+    <link rel="icon" type="image/png" href={`${assetBase}/favicon-32x32.png`} sizes="32x32" />
+    <link rel="icon" type="image/png" href={`${assetBase}/icon-192x192.png`} sizes="192x192" />
+    <link rel="apple-touch-icon" href={`${assetBase}/apple-touch-icon.png`} sizes="180x180" />
+    <meta name="msapplication-TileImage" content={`${assetBase}/mstile-270x270.png`} />
     <link rel="canonical" href="https://digital-forces.de/" />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('js');</script>
