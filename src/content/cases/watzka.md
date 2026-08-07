@@ -10,5 +10,5 @@ services:
   - individuelle Erweiterungen
   - technische Weiterentwicklung
 assetStatus: not-approved
-sourceNote: Owner-Freigabe vom 2026-08-06; konservative Fassung ohne Zahlen, Wirkungsclaims oder Architekturdetails.
+sourceNote: Owner-Freigabe vom 2026-08-06 und zusätzliche Freigabe für die noindex-Preview vom 2026-08-07; konservative Fassung ohne Zahlen, Wirkungsclaims oder Architekturdetails.
 ---

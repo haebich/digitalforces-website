@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 const cdpUrl = process.env.QA_CDP_URL ?? 'ws://browser:3000';
 const baseUrl = new URL(process.env.QA_BASE_URL ?? 'http://127.0.0.1:4321/');
 const outputDir = resolve(process.env.QA_OUTPUT_DIR ?? '/tmp/digitalforces-route-qa');
+const expectReleased = process.env.QA_EXPECT_RELEASED === 'true';
 const routes = ['/', '/leistungen/', '/referenzen/', '/impressum/', '/datenschutz/'];
 const widths = [1440, 1024, 768, 390];
 const expectedCanonicals = new Map(routes.map((route) => [route, new URL(route, 'https://www.digital-forces.de').toString()]));
@@ -105,7 +106,7 @@ for (const width of widths) {
     const state = await evaluate(page.sessionId, `(() => ({
       title: document.title,
       h1: document.querySelector('h1')?.textContent?.trim(),
-      canonical: document.querySelector('link[rel="canonical"]')?.href,
+      canonical: document.querySelector('link[rel="canonical"]')?.href ?? null,
       robots: document.querySelector('meta[name="robots"]')?.content,
       overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
       header: Boolean(document.querySelector('.site-header')),
@@ -122,7 +123,7 @@ for (const width of widths) {
       mailtoCount: document.querySelectorAll('a[href^="mailto:"]').length,
     }))()`);
 
-    const expectedCanonical = expectedCanonicals.get(route);
+    const expectedCanonical = expectReleased ? expectedCanonicals.get(route) : null;
     const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
     results.push({ route, width, passed, ...state, requestFailures, badResponses, externalRequests: [...new Set(externalRequests)] });
 
