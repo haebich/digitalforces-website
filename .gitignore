@@ -1,4 +1,5 @@
 node_modules
 dist
 .astro
+.seo-qa
 .DS_Store

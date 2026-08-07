@@ -51,11 +51,7 @@ export const migrationContact = {
   microcopy: 'Wir klären Ausgangslage, Risiken und den sinnvollen nächsten Schritt.',
 } as const;
 
-export const migrationRoutes = {
-  hub: '/leistungen/shopware-5-auf-6-migration/',
-  process: '/leistungen/shopware-5-auf-6-migration/migrationsprozess/',
-  dependencies: '/leistungen/shopware-5-auf-6-migration/daten-plugins-integrationen/',
-} as const;
+export const migrationRoutes = migrationDetailRoutes;
 
 export const migrationPages: MigrationPage[] = [
   {
@@ -292,3 +288,4 @@ export const migrationPages: MigrationPage[] = [
     ],
   },
 ];
+import { migrationDetailRoutes } from '../config/public-routes';

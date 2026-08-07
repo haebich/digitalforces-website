@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { qaRoutes } from '../src/config/public-routes.ts';
 
 const cdpUrl = process.env.QA_CDP_URL ?? 'ws://browser:3000';
 const baseUrl = new URL(process.env.QA_BASE_URL ?? 'http://127.0.0.1:4321/');
@@ -10,7 +11,9 @@ const migrationRoutes = [
   '/leistungen/shopware-5-auf-6-migration/migrationsprozess/',
   '/leistungen/shopware-5-auf-6-migration/daten-plugins-integrationen/',
 ];
-const routes = ['/', '/leistungen/', ...migrationRoutes, '/referenzen/', '/impressum/', '/datenschutz/'];
+const routeRecords = qaRoutes;
+const routes = routeRecords.map(({ pathname }) => pathname);
+const routePolicies = new Map(routeRecords.map((route) => [route.pathname, route]));
 const widths = [1440, 1024, 768, 390];
 const expectedCanonicals = new Map(routes.map((route) => [route, new URL(route, 'https://www.digital-forces.de').toString()]));
 
@@ -122,6 +125,7 @@ for (const width of widths) {
       title: document.title,
       h1: document.querySelector('h1')?.textContent?.trim(),
       canonical: document.querySelector('link[rel="canonical"]')?.href ?? null,
+      ogUrl: document.querySelector('meta[property="og:url"]')?.content ?? null,
       robots: document.querySelector('meta[name="robots"]')?.content,
       overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
       header: Boolean(document.querySelector('.site-header')),
@@ -166,7 +170,8 @@ for (const width of widths) {
     }))()`);
 
     const expectedCanonical = expectReleased ? expectedCanonicals.get(route) : null;
-    const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.robots === 'noindex, nofollow, noarchive' && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && state.homeUiReady && state.migrationUiReady && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
+    const expectedRobots = expectReleased ? (routePolicies.get(route)?.indexable ? 'index, follow' : 'noindex, follow') : 'noindex, nofollow, noarchive';
+    const passed = Boolean(state.h1) && state.canonical === expectedCanonical && state.ogUrl === expectedCanonical && state.robots === expectedRobots && !state.overflow && state.header && state.footer && state.mobileSummaryVisible && state.deadInternalLinks.length === 0 && state.duplicateIds.length === 0 && state.imagesMissingAlt === 0 && state.linksWithoutName === 0 && state.mainCount === 1 && state.mailtoCount > 0 && state.homeUiReady && state.migrationUiReady && requestFailures.length === 0 && badResponses.length === 0 && externalRequests.length === 0;
     results.push({ route, width, passed, ...state, requestFailures, badResponses, externalRequests: [...new Set(externalRequests)] });
 
     if ((route === '/' || route === '/leistungen/' || route === '/referenzen/' || route === migrationRoutes[0]) && (width === 1440 || width === 390 || (route === '/' && width === 1024))) {

@@ -13,6 +13,7 @@ import '../styles/process-codecard.css';
 import '../styles/migration-pages.css';
 import '../styles/service-pages.css';
 import { canonicalUrl } from '../config/site';
+import { getRoutePolicy } from '../config/public-routes';
 
 interface Props {
   title: string;
@@ -21,10 +22,12 @@ interface Props {
   robots?: 'index, follow' | 'noindex, follow';
 }
 
-const { title, description, pathname = '/', robots = 'index, follow' } = Astro.props;
+const { title, description, pathname = '/', robots } = Astro.props;
 const isPreview = import.meta.env.GITHUB_PAGES_PREVIEW === 'true';
 const isReleased = import.meta.env.PUBLIC_SITE_RELEASE === 'true' && !isPreview;
-const robotsContent = isReleased ? robots : 'noindex, nofollow, noarchive';
+const routePolicy = getRoutePolicy(pathname);
+const releaseRobots = robots ?? (routePolicy?.indexable ? 'index, follow' : 'noindex, follow');
+const robotsContent = isReleased ? releaseRobots : 'noindex, nofollow, noarchive';
 const assetBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = isReleased ? canonicalUrl(pathname) : undefined;
 ---
